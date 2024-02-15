@@ -57,11 +57,24 @@
                     $resultado = $conn->query("SELECT * FROM desenvolupador WHERE nombre = '$nombre'");
                     if ($resultado->rowCount() > 0) {
                         echo "El desarollador $nombre esta repetido <br>";
+                        $Desen_lastId = $conn->lastInsertId();
+                    } else {
+                        $conn->exec("INSERT INTO desenvolupador(nombre) VALUES ('$nombre')");
+                        $Desen_lastId = $conn->();
+
+                    }
+
+                    //Inserir Videojuego
+                    $nombre = $juego['Nom'];
+                    $lanzamiento = $juego['Llançament'];
+
+                    $resultado = $conn->query("SELECT * FROM videojuego WHERE nombre = '$nombre'");
+                    if ($resultado->rowCount() > 0) {
+                        echo "El videojuego $nombre esta repetido <br>";
                         $last_id = $conn->lastInsertId();
                     } else {
-                        $conn->exec("INSERT INTO desenvolupador (nombre) VALUES ('$nombre')");
+                        $conn->exec("INSERT INTO videojuego(nombre, fecha_lanzamiento, pegi, id_desenvolupador) VALUES ('$nombre', '$lanzamiento', 9, $Desen_lastId)");
                     }
-                    
                 }
                 $last_id = $conn->lastInsertId();
                 $conn = null;
