@@ -29,7 +29,6 @@ CREATE TABLE videojuego (
     fecha_lanzamiento DATE,
     pegi INT,
     id_desenvolupador INT,
-    id_plataforma INT,
     FOREIGN KEY (id_desenvolupador) REFERENCES desenvolupador(id)
 );
 
