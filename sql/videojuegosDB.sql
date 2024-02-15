@@ -7,7 +7,7 @@ USE Juegos;
 -- Crear la tabla desenvolupador
 CREATE TABLE desenvolupador (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    nombre VARCHAR(30) NOT NULL
+    nombre VARCHAR(50) NOT NULL
 );
 
 -- Crear la tabla plataforma
