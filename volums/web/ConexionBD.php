@@ -41,28 +41,19 @@
             }
             //inserir el deselvolupador dentro de la tabla
             try {
-                // $conn = $this->connectar_bd();
-                // $nombres = array();
-                // $repetidos = array();
-                // $noRepetidos = array();
+                $conn = $this->connectar_bd();
 
-                // foreach ($videojuegos as $desarrollo) {
-                //     $nombre = $desarrollo['Desenvolupador'];
+                foreach ($videojuegos as $desarrollo) {
+                    $nombre = $desarrollo['Desenvolupador'];
 
-                //     if (in_array($nombre, $nombres)) {
-                //         $repetidos[] = $desarrollo;
-                //     } else {
-                //         $nombres[] = $nombre;
-                //         $noRepetidos[] = $desarrollo;
-                //         $sql
-                //         $sql = "INSERT INTO desenvolupador (nombre) VALUES ('$desarrollo[Desenvolupador]')";
-                //         echo "se han añadido los nuevos registros $desarrollo[Desenvolupador]";
-                //         $conn->exec($sql);
-                //         $last_id = $conn->lastInsertId();
-                //     }
-                    
-                // }
-                // $conn = null;
+                    $resultado = $conn->query("SELECT * FROM desenvolupador WHERE nombre = '$nombre'");
+                    if ($resultado->rowCount() > 0) {
+                        echo "El desarollador $nombre esta repetido <br>";
+                    } else {
+                        $conn->exec("INSERT INTO desenvolupador (nombre) VALUES ('$nombre')");
+                    }
+                }
+                $conn = null;
             } catch (PDOException $e) {
                 echo "Connection failed: ". $e->getMessage();
             }
