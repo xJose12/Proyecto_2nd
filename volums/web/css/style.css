@@ -1,0 +1,60 @@
+/* Estilos para el encabezado */
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 24px;
+}
+
+header h3 {
+    margin: 5px 0 0;
+    font-size: 18px;
+}
+
+/* Estilos para la barra de navegación */
+nav {
+    background-color: #007bff;
+    padding: 10px;
+    text-align: center;
+}
+
+nav a {
+    color: #fff;
+    text-decoration: none;
+    padding: 5px 10px;
+    margin: 0 5px;
+    border-radius: 5px;
+}
+
+nav a:hover {
+    background-color: #0056b3;
+}
+
+/* Estilos para el enlace activo */
+nav a.active {
+    background-color: #ffcc00; /* Cambia el color de fondo para resaltar */
+    color: #000; /* Cambia el color del texto para que sea legible */
+    font-weight: bold; /* Otras modificaciones visuales para indicar la selección */
+}
+
+/* Estilos para el contenido principal */
+main {
+    text-align: center; /* Centra el contenido */
+    margin-top: 50px; /* Espacio entre el encabezado y el contenido */
+}
+
+.wrapper {
+    display: inline-block; /* Permite centrar horizontalmente */
+}
+
+/* Estilos generales */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
