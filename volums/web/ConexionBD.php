@@ -68,13 +68,13 @@
                     //Inserir Videojuego
                     $nombre = $juego['Nom'];
                     $lanzamiento = $juego['Llançament'];
-
-                    $resultado = $conn->query("SELECT * FROM videojuego WHERE nombre = '$nombre'");
+                    $nombreModificado = str_replace("'","´", $nombre);
+                    $resultado = $conn->query("SELECT * FROM videojuego WHERE nombre = '$nombreModificado'");
                     if ($resultado->rowCount() > 0) {
-                        echo "El videojuego $nombre esta repetido <br>";
+                        echo "El videojuego $nombreModificado esta repetido <br>";
                         $last_id = $conn->lastInsertId();
                     } else {
-                        $conn->exec("INSERT INTO videojuego(nombre, fecha_lanzamiento, pegi, id_desenvolupador) VALUES ('$nombre', '$lanzamiento', 9, $Desen_id)");
+                        $conn->exec("INSERT INTO videojuego(nombre, fecha_lanzamiento, pegi, id_desenvolupador) VALUES ('$nombreModificado', '$lanzamiento', 9, $Desen_id)");
                     }
                 }
                 $last_id = $conn->lastInsertId();
