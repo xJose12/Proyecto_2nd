@@ -2,7 +2,7 @@
 DROP DATABASE IF EXISTS Juegos;
 
 -- Crear la base de datos
-CREATE DATABASE Juegos;
+CREATE DATABASE Juegos CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- Usar la base de datos
 USE Juegos;
@@ -26,9 +26,9 @@ CREATE TABLE genero (
 );
 
 -- Crear la tabla videojuego con claves foráneas
-CREATE TABLE videojuego (
+CREATE TABLE videojuego  (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    nombre VARCHAR(150) NOT NULL,
+    nombre VARCHAR(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci  NOT NULL,
     fecha_lanzamiento DATE,
     pegi INT,
     id_desenvolupador INT,
