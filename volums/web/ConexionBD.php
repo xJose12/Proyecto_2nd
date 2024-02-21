@@ -27,7 +27,7 @@
         public function connectar_bd()
         {
             try {
-                $conn = new PDO("mysql:host=$this->servername;dbname=$this->bdname", $this->usuario, $this->contraseña);
+                $conn = new PDO("mysql:host=$this->servername;dbname=$this->bdname;", $this->usuario, $this->contraseña);
                 $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                 echo "Connected $this->bdname <br>";
             } catch (PDOException $e) {
@@ -41,7 +41,7 @@
             //importamos la base de datos 
             $videojuegos = array();
             $jsonString = file_get_contents($archivo);
-            $videojuegos = json_decode($jsonString, true);
+            $videojuegos = json_decode($jsonString,true, 512, JSON_INVALID_UTF8_SUBSTITUTE);
             if (json_last_error() !== JSON_ERROR_NONE) {
                 die('Error  JSON: ' . json_last_error_msg());
             }
