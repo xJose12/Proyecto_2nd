@@ -90,18 +90,23 @@
                     $resultado = $conn->query("SELECT * FROM videojuego WHERE nombre = '$nombreModificado'");
                     if ($resultado->rowCount() > 0) {
                         echo "Los videojuego estan repetidos <br>";
-                        $last_id = $conn->lastInsertId();
+                        $Vid_id = $conn->lastInsertId();
                     } else {
                         $conn->exec("INSERT INTO videojuego(nombre, fecha_lanzamiento, pegi, id_desenvolupador) VALUES ('$nombreModificado', '$lanzamiento', 9, $Desen_id)");
                         echo "Los videojuego estan insertaos <br>";
                     }
 
-
-
-
-
+                    //Inserir vidojuego-plataforma
+                    $resultado = $conn->query("SELECT * video_plata WHERE id_videojuego = ''");
+                    if ($resultado->rowCount() > 0) {
+                        $row = $resultado->fetch(PDO::FETCH_ASSOC);
+                        echo "La platafora $plataforma esta repetido <br>";
+                    } else {
+                        $conn->exec("INSERT INTO plataforma(nombre) VALUES ('$plataforma')");
+                        echo "La platafora $plataforma se ha insertado <br>";
+                    }
                 }
-                $last_id = $conn->lastInsertId();
+
                 $conn = null;
             } catch (PDOException $e) {
                 echo "Connection failed: " . $e->getMessage();
