@@ -32,21 +32,28 @@
             <h2>Inserir Desenvolupador</h2>
             Nombre: <input type="text" name="DesenvolupadorNombre"><br>
             <h2>Inserir Plataforma</h2>
-            Nombre: <input type="text" name="PlataformaNombre"><br>
+            Nombre: <input type="text" name="PlataformaNombre"><br><br>
             <input type="submit">
          </form> <br>
 
          <?php
         $GeneroNombre = $DesenvolupadorNombre = $PlataformaNombre = "";
         
-        if ($_SERVER["REQUEST_METHOD"] == "GET" ) {
+        if ($_SERVER["REQUEST_METHOD"] == "GET" && test_input($_GET["GeneroNombre"] != null) 
+        or test_input($_GET["PlataformaNombre"] != null) or test_input($_GET["DesenvolupadorNombre"] != null)) {
             $GeneroNombre = test_input($_GET["GeneroNombre"]);
             $DesenvolupadorNombre = test_input($_GET["DesenvolupadorNombre"]);
             $PlataformaNombre = test_input($_GET["PlataformaNombre"]);
-
+           
+            echo "<h2>Insercciones</h2>";
             echo "Genero Nombre: $GeneroNombre <br>";
             echo "Desenvolupador Nombre: $DesenvolupadorNombre <br>";
             echo "Plataforma Nombre: $PlataformaNombre <br>";
+
+            $inserir = new BBDD("db", "root", "politecnic", "Juegos");
+            $insertar = $inserir->alta($GeneroNombre, $DesenvolupadorNombre, $PlataformaNombre);
+            
+
         }
 
         function test_input($data) {

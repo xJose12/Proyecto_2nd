@@ -29,7 +29,6 @@
             try {
                 $conn = new PDO("mysql:host=$this->servername;dbname=$this->bdname;", $this->usuario, $this->contraseña);
                 $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                echo "Connected $this->bdname <br>";
             } catch (PDOException $e) {
                 echo "Connection failed2: " . $e->getMessage();
             }
@@ -58,11 +57,9 @@
                     if ($resultado->rowCount() > 0) {
                         $row = $resultado->fetch(PDO::FETCH_ASSOC);
                         $Desen_id  = $row['id'];
-                        echo "El desarollador esta repetido <br>";
                     } else {
                         $conn->exec("INSERT INTO desenvolupador(nombre) VALUES ('$nombre')");
                         $Desen_id = $conn->lastInsertId();
-                        echo "El desarollador se ha insertado <br>";
                     }
 
                     //Inserir Videojuego
@@ -71,12 +68,10 @@
                     $nombreModificado = str_replace("'", "´", $nombre);
                     $resultado = $conn->query("SELECT * FROM videojuego WHERE nombre = '$nombreModificado'");
                     if ($resultado->rowCount() > 0) {
-                        echo "Los videojuego estan repetidos <br>";
                         $Vid_id = $row['id'];
                     } else {
                         $conn->exec("INSERT INTO videojuego(nombre, fecha_lanzamiento, pegi, id_desenvolupador) VALUES ('$nombreModificado', '$lanzamiento', 9, $Desen_id)");
                         $Vid_id = $conn->lastInsertId();
-                        echo "Los videojuego estan insertaos <br>";
                     }
 
                     // Inserir plataforma // videojuego-plataforma
@@ -91,23 +86,19 @@
                             // La plataforma ya existe, obtener su ID
                             $row = $resultado->fetch(PDO::FETCH_ASSOC);
                             $Plata_id = $row['id'];
-                            echo "La plataforma $plataforma ya existe con ID $Plata_id <br>";
                         } else {
                             // La plataforma no existe, insertarla
                             $conn->exec("INSERT INTO plataforma(nombre) VALUES ('$plataforma')");
                             $Plata_id = $conn->lastInsertId();
-                            echo "La plataforma $plataforma se ha insertado con ID $Plata_id <br>";
                         }
 
                         $resultado2 = $conn->query("SELECT * FROM video_plata WHERE id_videojuego = '$Vid_id' and id_plataforma = '$Plata_id'");
                         if ($resultado2->rowCount() > 0) {
                             $row = $resultado2->fetch(PDO::FETCH_ASSOC);
                             $VidPlata_id = $row['id'];
-                            echo "La plataforma $plataforma ya existe con ID $VidPlata_id <br>";
                         } else {
                             $conn->exec("INSERT INTO video_plata(id_videojuego, id_plataforma) VALUES ('$Vid_id', '$Plata_id')");
                             $VidPlata_id = $conn->lastInsertId();
-                            echo "La plataforma $plataforma se ha insertado con ID $VidPlata_id <br>";
                         }
                     }
                 }
@@ -118,24 +109,50 @@
             }
         }
 
-        public function alta() {
+        public function alta($GeneroNombre, $DesenvolupadorNombre, $PlataformaNombre) {
             $conn = $this->connectar_bd();
+            //Insertar desenvolupadores
+            if ($DesenvolupadorNombre != null) { 
+                try {
+                    $resultado = $conn->query("SELECT * FROM desenvolupador WHERE nombre = '$DesenvolupadorNombre'");
 
-            try {
-                $sql = "INSERT INTO desenvolupador(nombre) VALUES ('') ";
-                $sql = "INSERT INTO plataforma(nombre) VALUES ('')";
-                $sql = "INSERT INTO genero(nombre)  VALUES ('')";
-
-            } catch (PDOException $e) {
-                echo "Connection failed: " . $e->getMessage();
+                    if ($resultado->rowCount() == 0) {
+                        $conn->exec ("INSERT INTO desenvolupador(nombre) VALUES ('$DesenvolupadorNombre')");
+                    }
+                } catch (PDOException $e) {
+                    echo "Connection failed: " . $e->getMessage();
+                }
             }
+            //Insertar plataforma
+            if ($PlataformaNombre != null) {
+                try {
+                    $resultado = $conn->query("SELECT * FROM plataforma WHERE nombre = '$PlataformaNombre'");
 
+                    if ($resultado->rowCount() == 0) {
+                        $conn->exec ("INSERT INTO plataforma(nombre) VALUES ('$PlataformaNombre')");
+                    }
+                } catch (PDOException $e) {
+                    echo "Connection failed: " . $e->getMessage();
+                }
+            }
+            //Insertar genero
+            if ($GeneroNombre != null) {
+                try {
+                    $resultado = $conn->query("SELECT * FROM genero WHERE nombre = '$GeneroNombre'");
+
+                    if ($resultado->rowCount() == 0) {
+                        $conn->exec ("INSERT INTO genero(nombre) VALUES ('$GeneroNombre')");
+                    }
+                } catch (PDOException $e) {
+                    echo "Connection failed: " . $e->getMessage();
+                }
+            }
         }
 
     }
     $bbdd = new BBDD("db", "root", "politecnic", "Juegos");
     $conn = $bbdd->connectar_bd();
-    $conn = $bbdd->importarJson("games.json");
+    // $conn = $bbdd->importarJson("games.json");
     ?>
 </body>
 
