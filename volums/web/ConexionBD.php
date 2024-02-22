@@ -65,10 +65,6 @@
                         echo "El desarollador se ha insertado <br>";
                     }
 
-                    // //Inserir Plataforma
-                    $nombre = $juego['Plataforma'];
-                    $nombres = explode(', ', $nombre);
-
                     //Inserir Videojuego
                     $nombre = $juego['Nom'];
                     $lanzamiento = $juego['Llançament'];
@@ -83,7 +79,10 @@
                         echo "Los videojuego estan insertaos <br>";
                     }
 
-                    // Inserir videojuego-plataforma
+                    // Inserir plataforma // videojuego-plataforma
+                    $nombre = $juego['Plataforma'];
+                    $nombres = explode(', ', $nombre);
+
                     foreach ($nombres as $plataforma) {
                         // Buscar la plataforma en la base de datos
                         $resultado = $conn->query("SELECT * FROM plataforma WHERE nombre = '$plataforma'");
