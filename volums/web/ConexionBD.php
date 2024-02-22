@@ -41,7 +41,7 @@
             //importamos la base de datos 
             $videojuegos = array();
             $jsonString = file_get_contents($archivo);
-            $videojuegos = json_decode($jsonString,true, 512, JSON_INVALID_UTF8_SUBSTITUTE);
+            $videojuegos = json_decode($jsonString, true, 512, JSON_INVALID_UTF8_SUBSTITUTE);
             if (json_last_error() !== JSON_ERROR_NONE) {
                 die('Error  JSON: ' . json_last_error_msg());
             }
@@ -65,45 +65,51 @@
                         echo "El desarollador se ha insertado <br>";
                     }
 
-                    //Inserir Plataforma
+                    // //Inserir Plataforma
                     $nombre = $juego['Plataforma'];
                     $nombres = explode(', ', $nombre);
-
-                    foreach ($nombres as $plataforma) {
-
-                        $resultado = $conn->query("SELECT * FROM plataforma WHERE nombre = '$plataforma'");
-                        if ($resultado->rowCount() > 0) {
-                            $row = $resultado->fetch(PDO::FETCH_ASSOC);
-                            $Plata_id  = $row['id'];
-                            echo "La platafora $plataforma esta repetido <br>";
-                        } else {
-                            $conn->exec("INSERT INTO plataforma(nombre) VALUES ('$plataforma')");
-                            $Plata_id = $conn->lastInsertId();
-                            echo "La platafora $plataforma se ha insertado <br>";
-                        }
-                    }
 
                     //Inserir Videojuego
                     $nombre = $juego['Nom'];
                     $lanzamiento = $juego['Llançament'];
-                    $nombreModificado = str_replace("'","´", $nombre);
+                    $nombreModificado = str_replace("'", "´", $nombre);
                     $resultado = $conn->query("SELECT * FROM videojuego WHERE nombre = '$nombreModificado'");
                     if ($resultado->rowCount() > 0) {
                         echo "Los videojuego estan repetidos <br>";
-                        $Vid_id = $conn->lastInsertId();
+                        $Vid_id = $row['id'];
                     } else {
                         $conn->exec("INSERT INTO videojuego(nombre, fecha_lanzamiento, pegi, id_desenvolupador) VALUES ('$nombreModificado', '$lanzamiento', 9, $Desen_id)");
+                        $Vid_id = $conn->lastInsertId();
                         echo "Los videojuego estan insertaos <br>";
                     }
 
-                    //Inserir vidojuego-plataforma
-                    $resultado = $conn->query("SELECT * video_plata WHERE id_videojuego = ''");
-                    if ($resultado->rowCount() > 0) {
-                        $row = $resultado->fetch(PDO::FETCH_ASSOC);
-                        echo "La platafora $plataforma esta repetido <br>";
-                    } else {
-                        $conn->exec("INSERT INTO plataforma(nombre) VALUES ('$plataforma')");
-                        echo "La platafora $plataforma se ha insertado <br>";
+                    // Inserir videojuego-plataforma
+                    foreach ($nombres as $plataforma) {
+                        // Buscar la plataforma en la base de datos
+                        $resultado = $conn->query("SELECT * FROM plataforma WHERE nombre = '$plataforma'");
+
+                        if ($resultado->rowCount() > 0) {
+                            // La plataforma ya existe, obtener su ID
+                            $row = $resultado->fetch(PDO::FETCH_ASSOC);
+                            $Plata_id = $row['id'];
+                            echo "La plataforma $plataforma ya existe con ID $Plata_id <br>";
+                        } else {
+                            // La plataforma no existe, insertarla
+                            $conn->exec("INSERT INTO plataforma(nombre) VALUES ('$plataforma')");
+                            $Plata_id = $conn->lastInsertId();
+                            echo "La plataforma $plataforma se ha insertado con ID $Plata_id <br>";
+                        }
+
+                        $resultado2 = $conn->query("SELECT * FROM video_plata WHERE id_videojuego = '$Vid_id' and id_plataforma = '$Plata_id'");
+                        if ($resultado2->rowCount() > 0) {
+                            $row = $resultado2->fetch(PDO::FETCH_ASSOC);
+                            $VidPlata_id = $row['id'];
+                            echo "La plataforma $plataforma ya existe con ID $VidPlata_id <br>";
+                        } else {
+                            $conn->exec("INSERT INTO video_plata(id_videojuego, id_plataforma) VALUES ('$Vid_id', '$Plata_id')");
+                            $VidPlata_id = $conn->lastInsertId();
+                            echo "La plataforma $plataforma se ha insertado con ID $VidPlata_id <br>";
+                        }
                     }
                 }
 
@@ -118,4 +124,5 @@
     $conn = $bbdd->importarJson("games.json");
     ?>
 </body>
+
 </html>
