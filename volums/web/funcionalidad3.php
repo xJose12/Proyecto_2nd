@@ -9,8 +9,11 @@
 </head>
 
 <body>
+    <?php
+    include "ConexionBD.php";
+    ?>
     <header>
-        <h1>Funcionalidad 3</h1>
+        <h1>Formulario de insercción </h1>
     </header>
 
     <nav>
@@ -22,6 +25,39 @@
         <a href="funcionalidad7.php" <?php if (basename($_SERVER['PHP_SELF']) == 'funcionalidad7.php') echo 'class="active"'; ?>> Funcion 7</a>
     </nav>
 
+    <main>
+        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="get">
+            <h2>Inserir Genero</h2>
+            Nombre: <input type="text" name="GeneroNombre"><br>
+            <h2>Inserir Desenvolupador</h2>
+            Nombre: <input type="text" name="DesenvolupadorNombre"><br>
+            <h2>Inserir Plataforma</h2>
+            Nombre: <input type="text" name="PlataformaNombre"><br>
+            <input type="submit">
+         </form> <br>
+
+         <?php
+        $GeneroNombre = $DesenvolupadorNombre = $PlataformaNombre = "";
+        
+        if ($_SERVER["REQUEST_METHOD"] == "GET" ) {
+            $GeneroNombre = test_input($_GET["GeneroNombre"]);
+            $DesenvolupadorNombre = test_input($_GET["DesenvolupadorNombre"]);
+            $PlataformaNombre = test_input($_GET["PlataformaNombre"]);
+
+            echo "Genero Nombre: $GeneroNombre <br>";
+            echo "Desenvolupador Nombre: $DesenvolupadorNombre <br>";
+            echo "Plataforma Nombre: $PlataformaNombre <br>";
+        }
+
+        function test_input($data) {
+            $data = trim($data);
+            $data = stripslashes($data);
+            $data = htmlspecialchars($data);
+            return $data;
+        }
+        ?>
+
+    </main>
 </body>
 
 </html>

@@ -117,6 +117,21 @@
                 echo "Connection failed: " . $e->getMessage();
             }
         }
+
+        public function alta() {
+            $conn = $this->connectar_bd();
+
+            try {
+                $sql = "INSERT INTO desenvolupador(nombre) VALUES ('') ";
+                $sql = "INSERT INTO plataforma(nombre) VALUES ('')";
+                $sql = "INSERT INTO genero(nombre)  VALUES ('')";
+
+            } catch (PDOException $e) {
+                echo "Connection failed: " . $e->getMessage();
+            }
+
+        }
+
     }
     $bbdd = new BBDD("db", "root", "politecnic", "Juegos");
     $conn = $bbdd->connectar_bd();
