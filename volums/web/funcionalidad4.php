@@ -87,7 +87,7 @@
                 echo "<br>";
 
                 if (!empty($resultado)) {
-                    echo "<table border=1px width=\"100%\">\n";
+                    echo "<table border=1px>";
                     echo "<tr>\n";
                     foreach ($resultado[0] as $key => $useless) {
                         echo "<th>$key</th>";

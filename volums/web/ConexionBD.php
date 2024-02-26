@@ -37,12 +37,15 @@
 
         public function importarJson($archivo)
         {
-            //importamos la base de datos 
+            //importamos el json
             $videojuegos = array();
+            if (!file_exists($archivo)) {
+                return false;
+            }
             $jsonString = file_get_contents($archivo);
             $videojuegos = json_decode($jsonString, true, 512, JSON_INVALID_UTF8_SUBSTITUTE);
             if (json_last_error() !== JSON_ERROR_NONE) {
-                die('Error  JSON: ' . json_last_error_msg());
+                return false;
             }
 
             //Inserir datos
@@ -104,20 +107,23 @@
                 }
 
                 $conn = null;
+                return true;
             } catch (PDOException $e) {
-                echo "Connection failed: " . $e->getMessage();
+                // echo "Connection failed: " . $e->getMessage();
+                return false;
             }
         }
 
-        public function alta($GeneroNombre, $DesenvolupadorNombre, $PlataformaNombre) {
+        public function alta($GeneroNombre, $DesenvolupadorNombre, $PlataformaNombre)
+        {
             $conn = $this->connectar_bd();
             //Insertar desenvolupadores
-            if ($DesenvolupadorNombre != null) { 
+            if ($DesenvolupadorNombre != null) {
                 try {
                     $resultado = $conn->query("SELECT * FROM desenvolupador WHERE nombre = '$DesenvolupadorNombre'");
 
                     if ($resultado->rowCount() == 0) {
-                        $conn->exec ("INSERT INTO desenvolupador(nombre) VALUES ('$DesenvolupadorNombre')");
+                        $conn->exec("INSERT INTO desenvolupador(nombre) VALUES ('$DesenvolupadorNombre')");
                     }
                 } catch (PDOException $e) {
                     echo "Connection failed: " . $e->getMessage();
@@ -129,7 +135,7 @@
                     $resultado = $conn->query("SELECT * FROM plataforma WHERE nombre = '$PlataformaNombre'");
 
                     if ($resultado->rowCount() == 0) {
-                        $conn->exec ("INSERT INTO plataforma(nombre) VALUES ('$PlataformaNombre')");
+                        $conn->exec("INSERT INTO plataforma(nombre) VALUES ('$PlataformaNombre')");
                     }
                 } catch (PDOException $e) {
                     echo "Connection failed: " . $e->getMessage();
@@ -141,7 +147,7 @@
                     $resultado = $conn->query("SELECT * FROM genero WHERE nombre = '$GeneroNombre'");
 
                     if ($resultado->rowCount() == 0) {
-                        $conn->exec ("INSERT INTO genero(nombre) VALUES ('$GeneroNombre')");
+                        $conn->exec("INSERT INTO genero(nombre) VALUES ('$GeneroNombre')");
                     }
                 } catch (PDOException $e) {
                     echo "Connection failed: " . $e->getMessage();
@@ -149,15 +155,16 @@
             }
         }
 
-        public function eliminar($GeneroNombre, $DesenvolupadorNombre, $PlataformaNombre) {
+        public function eliminar($GeneroNombre, $DesenvolupadorNombre, $PlataformaNombre)
+        {
             $conn = $this->connectar_bd();
             //Insertar desenvolupadores
-            if ($DesenvolupadorNombre != null) { 
+            if ($DesenvolupadorNombre != null) {
                 try {
                     $resultado = $conn->query("SELECT * FROM desenvolupador WHERE nombre = '$DesenvolupadorNombre'");
 
                     if ($resultado->rowCount() == 0) {
-                        $conn->exec ("INSERT INTO desenvolupador(nombre) VALUES ('$DesenvolupadorNombre')");
+                        $conn->exec("INSERT INTO desenvolupador(nombre) VALUES ('$DesenvolupadorNombre')");
                     }
                 } catch (PDOException $e) {
                     echo "Connection failed: " . $e->getMessage();
@@ -169,7 +176,7 @@
                     $resultado = $conn->query("SELECT * FROM plataforma WHERE nombre = '$PlataformaNombre'");
 
                     if ($resultado->rowCount() == 0) {
-                        $conn->exec ("INSERT INTO plataforma(nombre) VALUES ('$PlataformaNombre')");
+                        $conn->exec("INSERT INTO plataforma(nombre) VALUES ('$PlataformaNombre')");
                     }
                 } catch (PDOException $e) {
                     echo "Connection failed: " . $e->getMessage();
@@ -181,7 +188,7 @@
                     $resultado = $conn->query("SELECT * FROM genero WHERE nombre = '$GeneroNombre'");
 
                     if ($resultado->rowCount() == 0) {
-                        $conn->exec ("INSERT INTO genero(nombre) VALUES ('$GeneroNombre')");
+                        $conn->exec("INSERT INTO genero(nombre) VALUES ('$GeneroNombre')");
                     }
                 } catch (PDOException $e) {
                     echo "Connection failed: " . $e->getMessage();
@@ -189,7 +196,8 @@
             }
         }
         // Consultar tablas
-        public function consultar($tablaConsulta) {
+        public function consultar($tablaConsulta)
+        {
             $conn = $this->connectar_bd();
             try {
                 $resultado = $conn->prepare("SELECT * FROM $tablaConsulta");
@@ -205,17 +213,8 @@
                 //throw $th;
             }
         }
-
-
-
-
-
-
-
     }
-    $bbdd = new BBDD("db", "root", "politecnic", "Juegos");
-    $conn = $bbdd->connectar_bd();
-    $conn = $bbdd->importarJson("games.json");
+
     ?>
 </body>
 
