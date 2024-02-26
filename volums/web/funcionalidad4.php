@@ -9,6 +9,9 @@
 </head>
 
 <body>
+    <?php
+    include "ConexionBD.php";
+    ?>
     <header>
         <h1>Formulario de Consultas y Eliminación</h1>
     </header>
@@ -23,45 +26,59 @@
     </nav>
 
     <main>
-        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="get">
-            <label for="consultas">Consultas</label>
-            <select name="consultas" id="consultas">
-            <option value="genero">Genero</option>
-            <option value="desenvolupador">Desenvolupador</option>
-            <option value="plataforma">Plataforma</option>
+        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="get">
+            <label for="consulta">Consultas</label>
+            <select name="consulta" id="consulta">
+                <option value="genero">Genero</option>
+                <option value="desenvolupador">Desenvolupador</option>
+                <option value="plataforma">Plataforma</option>
             </select>
             <input type="submit" value="Consultar">
 
-            <!-- <h2>Eliminar Genero</h2>
-            Nombre: <input type="text" name="GeneroNombre"><br>
-            <h2>Eliminar Desenvolupador</h2>
-            Nombre: <input type="text" name="DesenvolupadorNombre"><br>
-            <h2>Eliminar Plataforma</h2>
-            Nombre: <input type="text" name="PlataformaNombre"><br><br> -->
-            
-         </form> <br>
+            <h2>Eliminar Genero(ID)</h2>
+            ID: <input type="number" name="GeneroNombre"><br>
+            <h2>Eliminar Desenvolupador(ID)</h2>
+            ID: <input type="number" name="DesenvolupadorNombre"><br>
+            <h2>Eliminar Plataforma(ID)</h2>
+            ID: <input type="number" name="PlataformaNombre"><br><br>
+            <input type="submit">
+        </form> <br>
 
-         <?php
-        $GeneroNombre = $DesenvolupadorNombre = $PlataformaNombre = "";
-        
-        if ($_SERVER["REQUEST_METHOD"] == "GET" && test_input($_GET["GeneroNombre"] != null) 
-        or test_input($_GET["PlataformaNombre"] != null) or test_input($_GET["DesenvolupadorNombre"] != null)) {
-            $GeneroNombre = test_input($_GET["GeneroNombre"]);
-            $DesenvolupadorNombre = test_input($_GET["DesenvolupadorNombre"]);
-            $PlataformaNombre = test_input($_GET["PlataformaNombre"]);
-           
-            echo "<h2>Insercciones</h2>";
-            echo "Genero Nombre: $GeneroNombre <br>";
-            echo "Desenvolupador Nombre: $DesenvolupadorNombre <br>";
-            echo "Plataforma Nombre: $PlataformaNombre <br>";
+        <?php
+        $consulta = $eliminar = "";
 
-            $inserir = new BBDD("db", "root", "politecnic", "Juegos");
-            $insertar = $inserir->alta($GeneroNombre, $DesenvolupadorNombre, $PlataformaNombre);
-            
+        if (
+            $_SERVER["REQUEST_METHOD"] == "GET" && test_input($_GET["consulta"] != null)
+            or test_input($_GET["eliminar"] != null)
+        ) {
+            $consulta = test_input($_GET["consulta"]);
+            $eliminar = test_input($_GET["eliminar"]);
 
+            $bbdd = new BBDD("db", "root", "politecnic", "Juegos");
+            $consulta = $bbdd->consultar($consulta);
+            $resultado = $consulta->fetchAll(PDO::FETCH_ASSOC);
+            if ($resultado != null) {
+                echo "<table border=1px wdith=\"100%\">\n";
+                echo "<tr>\n";
+                foreach ($resultado[0] as $key => $useless) {
+                    echo "<th>$key</th>";
+                }
+                echo "</tr>\n";
+                foreach ($resultado as $row) {
+                    echo "<tr>\n";
+                    foreach ($row as $key => $val) {
+                        echo "<td>$val</td>";
+                    }
+                    echo "</tr>\n";
+                }
+                echo "</table>\n";
+            } else {
+                print("No hay valores en la tabla $consulta");
+            }
         }
 
-        function test_input($data) {
+        function test_input($data)
+        {
             $data = trim($data);
             $data = stripslashes($data);
             $data = htmlspecialchars($data);

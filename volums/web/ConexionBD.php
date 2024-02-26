@@ -188,6 +188,23 @@
                 }
             }
         }
+        // Consultar tablas
+        public function consultar($tablaConsulta) {
+            $conn = $this->connectar_bd();
+            try {
+                $resultado = $conn->prepare("SELECT * FROM $tablaConsulta");
+                $smtp = $resultado->execute();
+                if ($resultado->rowCount() == 0) {
+                    $resultado = null;
+                    return ($resultado);
+                } else {
+                    return ($resultado);
+                }
+                $conn = null;
+            } catch (PDOException $e) {
+                //throw $th;
+            }
+        }
 
 
 
@@ -198,7 +215,7 @@
     }
     $bbdd = new BBDD("db", "root", "politecnic", "Juegos");
     $conn = $bbdd->connectar_bd();
-    // $conn = $bbdd->importarJson("games.json");
+    $conn = $bbdd->importarJson("games.json");
     ?>
 </body>
 
