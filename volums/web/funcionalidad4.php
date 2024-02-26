@@ -17,63 +17,93 @@
     </header>
 
     <nav>
-        <a href="paginaInicial.html"> Pagina Inicio</a>
-        <a href="funcionalidad3.php" <?php if (basename($_SERVER['PHP_SELF']) == 'funcionalidad3.php') echo 'class="active"'; ?>> Funcion 3</a>
+        <a href="paginaInicial.php"> Pagina Inicio</a>
+        <a href="funcionalidad2.php"> Funcion 2</a>
+        <a href="funcionalidad3.php"> Funcion 3</a>
         <a href="funcionalidad4.php" <?php if (basename($_SERVER['PHP_SELF']) == 'funcionalidad4.php') echo 'class="active"'; ?>> Funcion 4</a>
-        <a href="funcionalidad5.php" <?php if (basename($_SERVER['PHP_SELF']) == 'funcionalidad5.php') echo 'class="active"'; ?>> Funcion 5</a>
-        <a href="funcionalidad6.php" <?php if (basename($_SERVER['PHP_SELF']) == 'funcionalidad6.php') echo 'class="active"'; ?>> Funcion 6</a>
-        <a href="funcionalidad7.php" <?php if (basename($_SERVER['PHP_SELF']) == 'funcionalidad7.php') echo 'class="active"'; ?>> Funcion 7</a>
+        <a href="funcionalidad5.php"> Funcion 5</a>
+        <a href="funcionalidad6.php"> Funcion 6</a>
+        <a href="funcionalidad7.php"> Funcion 7</a>
     </nav>
 
     <main>
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="get">
-            <label for="consulta">Consultas</label>
+            <label for="consulta">Consultas</label><br>
             <select name="consulta" id="consulta">
+                <option value="">Selecciona Tu Consulta</option>
                 <option value="genero">Genero</option>
                 <option value="desenvolupador">Desenvolupador</option>
                 <option value="plataforma">Plataforma</option>
             </select>
             <input type="submit" value="Consultar">
-
-            <h2>Eliminar Genero(ID)</h2>
-            ID: <input type="number" name="GeneroNombre"><br>
-            <h2>Eliminar Desenvolupador(ID)</h2>
-            ID: <input type="number" name="DesenvolupadorNombre"><br>
-            <h2>Eliminar Plataforma(ID)</h2>
-            ID: <input type="number" name="PlataformaNombre"><br><br>
-            <input type="submit">
         </form> <br>
 
         <?php
-        $consulta = $eliminar = "";
+        $consulta = $consultaEliminar = $eliminar = "";
 
-        if (
-            $_SERVER["REQUEST_METHOD"] == "GET" && test_input($_GET["consulta"] != null)
-            or test_input($_GET["eliminar"] != null)
-        ) {
+        if ($_SERVER["REQUEST_METHOD"] == "GET" && (test_input($_GET["consulta"]) != null or test_input($_GET["eliminar"]) != null)) {
             $consulta = test_input($_GET["consulta"]);
+            $consultaEliminar = test_input($_GET["consulta"]);
             $eliminar = test_input($_GET["eliminar"]);
 
             $bbdd = new BBDD("db", "root", "politecnic", "Juegos");
             $consulta = $bbdd->consultar($consulta);
-            $resultado = $consulta->fetchAll(PDO::FETCH_ASSOC);
-            if ($resultado != null) {
-                echo "<table border=1px wdith=\"100%\">\n";
-                echo "<tr>\n";
-                foreach ($resultado[0] as $key => $useless) {
-                    echo "<th>$key</th>";
+            if ($consulta != null) {
+                $resultado = $consulta->fetchAll(PDO::FETCH_ASSOC);
+
+                if ($consultaEliminar == "genero" || $consultaEliminar == "desenvolupador" || $consultaEliminar == "plataforma") {
+                    echo '<form action="' . htmlspecialchars($_SERVER["PHP_SELF"]) . '" method="get">';
+                    echo '<label for="eliminar">Eliminar ';
+
+                    if ($consultaEliminar == "genero") {
+                        echo 'Genero';
+                    } elseif ($consultaEliminar == "desenvolupador") {
+                        echo 'Desenvolupador';
+                    } elseif ($consultaEliminar == "plataforma") {
+                        echo 'Plataforma';
+                    }
+
+                    echo '</label><br>';
+                    echo '<select name="eliminar" id="eliminar">';
+                    // Agregar la opción por defecto
+                    echo '<option value="" selected>Selecciona tu ';
+
+                    if ($consultaEliminar == "genero") {
+                        echo 'genero';
+                    } elseif ($consultaEliminar == "desenvolupador") {
+                        echo 'desenvolupador';
+                    } elseif ($consultaEliminar == "plataforma") {
+                        echo 'plataforma';
+                    }
+
+                    echo '</option>';
+                    foreach ($resultado as $row) {
+                        echo '<option value="' . $row["nombre"] . '">' . $row["nombre"] . '</option>';
+                    }
+                    echo '</select>';
+                    echo '<input type="submit" value="Eliminar">';
+                    echo '</form>';
                 }
-                echo "</tr>\n";
-                foreach ($resultado as $row) {
+                echo "<br>";
+
+                if (!empty($resultado)) {
+                    echo "<table border=1px width=\"100%\">\n";
                     echo "<tr>\n";
-                    foreach ($row as $key => $val) {
-                        echo "<td>$val</td>";
+                    foreach ($resultado[0] as $key => $useless) {
+                        echo "<th>$key</th>";
                     }
                     echo "</tr>\n";
+                    foreach ($resultado as $row) {
+                        echo "<tr>\n";
+                        foreach ($row as $key => $val) {
+                            echo "<td>$val</td>";
+                        }
+                        echo "</tr>\n";
+                    }
+                    echo "</table>\n";
                 }
-                echo "</table>\n";
             } else {
-                print("No hay valores en la tabla $consulta");
+                echo "No existen datos dentro de la tabla.";
             }
         }
 

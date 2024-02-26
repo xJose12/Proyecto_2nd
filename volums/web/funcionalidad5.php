@@ -14,12 +14,13 @@
     </header>
 
     <nav>
-        <a href="paginaInicial.html"> Pagina Inicio</a>
-        <a href="funcionalidad3.php" <?php if (basename($_SERVER['PHP_SELF']) == 'funcionalidad3.php') echo 'class="active"'; ?>> Funcion 3</a>
-        <a href="funcionalidad4.php" <?php if (basename($_SERVER['PHP_SELF']) == 'funcionalidad4.php') echo 'class="active"'; ?>> Funcion 4</a>
+        <a href="paginaInicial.php"> Pagina Inicio</a>
+        <a href="funcionalidad2.php"> Funcion 2</a>
+        <a href="funcionalidad3.php"> Funcion 3</a>
+        <a href="funcionalidad4.php"> Funcion 4</a>
         <a href="funcionalidad5.php" <?php if (basename($_SERVER['PHP_SELF']) == 'funcionalidad5.php') echo 'class="active"'; ?>> Funcion 5</a>
-        <a href="funcionalidad6.php" <?php if (basename($_SERVER['PHP_SELF']) == 'funcionalidad6.php') echo 'class="active"'; ?>> Funcion 6</a>
-        <a href="funcionalidad7.php" <?php if (basename($_SERVER['PHP_SELF']) == 'funcionalidad7.php') echo 'class="active"'; ?>> Funcion 7</a>
+        <a href="funcionalidad6.php"> Funcion 6</a>
+        <a href="funcionalidad7.php"> Funcion 7</a>
     </nav>
 
 </body>
