@@ -11,11 +11,6 @@ header h1 {
     font-size: 24px;
 }
 
-header h3 {
-    margin: 5px 0 0;
-    font-size: 18px;
-}
-
 /* Estilos para la barra de navegación */
 nav {
     background-color: #007bff;
@@ -48,13 +43,50 @@ main {
     margin-top: 50px; /* Espacio entre el encabezado y el contenido */
 }
 
-.wrapper {
-    display: inline-block; /* Permite centrar horizontalmente */
+/* Estilos para el formulario */
+form {
+    margin-bottom: 20px;
 }
 
-/* Estilos generales */
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
+form label {
+    font-weight: bold;
+}
+
+form select {
+    padding: 5px;
+    margin-bottom: 10px;
+}
+
+form input[type="submit"] {
+    padding: 5px 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+form input[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+/* Estilos para la tabla */
+table {
+    width: 100%; /* Ocupa todo el ancho disponible */
+    border-collapse: collapse; /* Fusiona los bordes de las celdas */
+    margin-top: 20px; /* Espacio entre el formulario y la tabla */
+}
+
+th, td {
+    padding: 8px; /* Espaciado interno de las celdas */
+    border: 1px solid #ddd; /* Borde de las celdas */
+}
+
+th {
+    background-color: #f2f2f2; /* Color de fondo del encabezado */
+    font-weight: bold; /* Negrita en el encabezado */
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2; /* Color de fondo de las filas pares */
 }
