@@ -8,12 +8,14 @@ header {
 
 header h1 {
     margin: 0;
-    font-size: 24px;
+    font-size: 32px; /* Aumentamos el tamaño de la fuente */
+    font-family: 'Arial', sans-serif; /* Cambiamos la fuente */
 }
 
 header h3 {
     margin: 5px 0 0;
-    font-size: 18px;
+    font-size: 24px; /* Aumentamos el tamaño de la fuente */
+    font-family: 'Arial', sans-serif; /* Cambiamos la fuente */
 }
 
 /* Estilos para la barra de navegación */
@@ -26,9 +28,10 @@ nav {
 nav a {
     color: #fff;
     text-decoration: none;
-    padding: 5px 10px;
-    margin: 0 5px;
+    padding: 8px 16px; /* Aumentamos el espacio alrededor de los enlaces */
+    margin: 0 8px; /* Aumentamos el espacio entre enlaces */
     border-radius: 5px;
+    font-family: 'Arial', sans-serif; /* Cambiamos la fuente */
 }
 
 nav a:hover {
@@ -50,36 +53,69 @@ main {
 
 /* Estilos generales */
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Arial', sans-serif; /* Cambiamos la fuente */
     margin: 0;
     padding: 0;
+    line-height: 1.6; /* Aumentamos el espaciado entre líneas */
 }
 
-/* Estilos para la imagen */
-.wrapper img {
-    width: 200px;
-    height: auto;
-    display: block;
-    margin: 0 auto;
-}
 
 /* Estilos para la tabla */
 table {
-    width: 100%; /* Ocupa todo el ancho disponible */
+    width: 80%; /* Ancho de la tabla */
+    margin: 20px auto; /* Centrar la tabla horizontalmente con un espacio superior */
     border-collapse: collapse; /* Fusiona los bordes de las celdas */
-    margin-top: 20px; /* Espacio entre el formulario y la tabla */
+    font-family: 'Arial', sans-serif; /* Cambiamos la fuente */
 }
 
 th, td {
-    padding: 8px; /* Espaciado interno de las celdas */
+    padding: 12px; /* Aumentamos el espaciado interno de las celdas */
     border: 1px solid #ddd; /* Borde de las celdas */
 }
 
 th {
     background-color: #f2f2f2; /* Color de fondo del encabezado */
     font-weight: bold; /* Negrita en el encabezado */
+    text-transform: uppercase; /* Convertir el texto a mayúsculas */
+}
+
+/* Estilos para los encabezados específicos */
+th.column1 {
+    background-color: #007bff; /* Color de fondo personalizado */
+    color: #fff; /* Color de texto personalizado */
+}
+
+th.column2 {
+    background-color: #ffcc00; /* Color de fondo personalizado */
+    color: #000; /* Color de texto personalizado */
+}
+
+/* Estilos para las celdas específicas */
+td.column1 {
+    background-color: #e6f7ff; /* Color de fondo personalizado */
+}
+
+td.column2 {
+    background-color: #fff3e6; /* Color de fondo personalizado */
 }
 
 tr:nth-child(even) {
     background-color: #f2f2f2; /* Color de fondo de las filas pares */
+}
+
+/* Estilos para las filas impares */
+tr:nth-child(odd) {
+    background-color: #fff; /* Color de fondo de las filas impares */
+}
+
+/* Estilos para los enlaces dentro de las celdas */
+td a {
+    text-decoration: none; /* Sin subrayado en los enlaces */
+    color: #007bff; /* Color de texto personalizado */
+    font-weight: bold; /* Texto en negrita */
+}
+
+/* Estilos para los enlaces dentro de las celdas al pasar el mouse */
+td a:hover {
+    text-decoration: underline; /* Subrayado en los enlaces al pasar el mouse */
 }

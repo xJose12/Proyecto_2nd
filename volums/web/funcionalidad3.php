@@ -27,15 +27,18 @@
     </nav>
 
     <main>
-        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="get">
-            <h2>Inserir Genero</h2>
-            Nombre: <input type="text" name="GeneroNombre"><br>
-            <h2>Inserir Desenvolupador</h2>
-            Nombre: <input type="text" name="DesenvolupadorNombre"><br>
-            <h2>Inserir Plataforma</h2>
-            Nombre: <input type="text" name="PlataformaNombre"><br><br>
-            <input type="submit">
-        </form> <br>
+        <div>
+            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="get">
+                <h2>Inserir Genero</h2>
+                Nombre: <input type="text" name="GeneroNombre"><br>
+                <h2>Inserir Desenvolupador</h2>
+                Nombre: <input type="text" name="DesenvolupadorNombre"><br>
+                <h2>Inserir Plataforma</h2>
+                Nombre: <input type="text" name="PlataformaNombre"><br><br>
+                <input type="submit">
+            </form> <br>
+        </div>
+
 
         <?php
         $GeneroNombre = $DesenvolupadorNombre = $PlataformaNombre = "";
@@ -65,7 +68,6 @@
             return $data;
         }
         ?>
-
     </main>
 </body>
 
