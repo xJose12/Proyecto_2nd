@@ -83,6 +83,14 @@
                     echo '</select>';
                     echo '<input type="submit" value="Eliminar">';
                     echo '</form>';
+
+                    $nombre = "";
+                    if ($_SERVER["REQUEST_METHOD"] == "GET" && (test_input($_GET["eliminar"]) != null)) {
+                        $nombre = test_input($_GET["eliminar"]);
+                        echo $nombre;
+                        // $bbdd = new BBDD("db", "root", "politecnic", "Juegos");
+                        // $eliminar = $bbdd->eliminar($consultaEliminar, $nombre);
+                    }
                 }
                 echo "<br>";
 
@@ -103,9 +111,13 @@
                     echo "</table>\n";
                 }
             } else {
+                echo $nombre;
+
                 echo "No existen datos dentro de la tabla.";
             }
         }
+        echo $nombre;
+
 
         function test_input($data)
         {

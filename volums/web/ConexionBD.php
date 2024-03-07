@@ -155,46 +155,6 @@
             }
         }
 
-        public function eliminar($GeneroNombre, $DesenvolupadorNombre, $PlataformaNombre)
-        {
-            $conn = $this->connectar_bd();
-            //Insertar desenvolupadores
-            if ($DesenvolupadorNombre != null) {
-                try {
-                    $resultado = $conn->query("SELECT * FROM desenvolupador WHERE nombre = '$DesenvolupadorNombre'");
-
-                    if ($resultado->rowCount() == 0) {
-                        $conn->exec("INSERT INTO desenvolupador(nombre) VALUES ('$DesenvolupadorNombre')");
-                    }
-                } catch (PDOException $e) {
-                    echo "Connection failed: " . $e->getMessage();
-                }
-            }
-            //Insertar plataforma
-            if ($PlataformaNombre != null) {
-                try {
-                    $resultado = $conn->query("SELECT * FROM plataforma WHERE nombre = '$PlataformaNombre'");
-
-                    if ($resultado->rowCount() == 0) {
-                        $conn->exec("INSERT INTO plataforma(nombre) VALUES ('$PlataformaNombre')");
-                    }
-                } catch (PDOException $e) {
-                    echo "Connection failed: " . $e->getMessage();
-                }
-            }
-            //Insertar genero
-            if ($GeneroNombre != null) {
-                try {
-                    $resultado = $conn->query("SELECT * FROM genero WHERE nombre = '$GeneroNombre'");
-
-                    if ($resultado->rowCount() == 0) {
-                        $conn->exec("INSERT INTO genero(nombre) VALUES ('$GeneroNombre')");
-                    }
-                } catch (PDOException $e) {
-                    echo "Connection failed: " . $e->getMessage();
-                }
-            }
-        }
         // Consultar tablas
         public function consultar($tablaConsulta)
         {
@@ -211,6 +171,17 @@
                 $conn = null;
             } catch (PDOException $e) {
                 //throw $th;
+            }
+        }
+
+        public function eliminar($tabla, $nombre)
+        {
+            $conn = $this->connectar_bd();
+            //Eliminar desenvolopador
+            try {
+                $conn->exec("DELETE FROM $tabla where nombre = '$nombre'");   
+            } catch (PDOException $e) {
+                echo "Connection failed: " . $e->getMessage();
             }
         }
     }
