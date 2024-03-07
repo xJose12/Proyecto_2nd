@@ -41,60 +41,38 @@
         <?php
         $consulta = $consultaEliminar = $eliminar = "";
 
-        if ($_SERVER["REQUEST_METHOD"] == "GET" && (test_input($_GET["consulta"]) != null or test_input($_GET["eliminar"]) != null)) {
+        if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["consulta"])) {
             $consulta = test_input($_GET["consulta"]);
-            $consultaEliminar = test_input($_GET["consulta"]);
-            $eliminar = test_input($_GET["eliminar"]);
-
             $bbdd = new BBDD("db", "root", "politecnic", "Juegos");
-            $consulta = $bbdd->consultar($consulta);
-            if ($consulta != null) {
-                $resultado = $consulta->fetchAll(PDO::FETCH_ASSOC);
+            $resultado = $bbdd->consultar($consulta);
 
-                if ($consultaEliminar == "genero" || $consultaEliminar == "desenvolupador" || $consultaEliminar == "plataforma") {
+            if ($resultado !== null) {
+                $resultado = $resultado->fetchAll(PDO::FETCH_ASSOC);
+
+                if (!empty($resultado)) {
+                    // Formulario de eliminación
                     echo '<form action="' . htmlspecialchars($_SERVER["PHP_SELF"]) . '" method="get">';
                     echo '<label for="eliminar">Eliminar ';
 
-                    if ($consultaEliminar == "genero") {
+                    if ($consulta == "genero") {
                         echo 'Genero';
-                    } elseif ($consultaEliminar == "desenvolupador") {
+                    } elseif ($consulta == "desenvolupador") {
                         echo 'Desenvolupador';
-                    } elseif ($consultaEliminar == "plataforma") {
+                    } elseif ($consulta == "plataforma") {
                         echo 'Plataforma';
                     }
 
                     echo '</label><br>';
                     echo '<select name="eliminar" id="eliminar">';
-                    // Agregar la opción por defecto
-                    echo '<option value="" selected>Selecciona tu ';
-
-                    if ($consultaEliminar == "genero") {
-                        echo 'genero';
-                    } elseif ($consultaEliminar == "desenvolupador") {
-                        echo 'desenvolupador';
-                    } elseif ($consultaEliminar == "plataforma") {
-                        echo 'plataforma';
-                    }
-
-                    echo '</option>';
+                    echo '<option value="" selected>Selecciona el elemento a eliminar</option>';
                     foreach ($resultado as $row) {
                         echo '<option value="' . $row["nombre"] . '">' . $row["nombre"] . '</option>';
                     }
                     echo '</select>';
+                    echo '<input type="hidden" name="consultaEliminar" value="' . $consulta . '">';
                     echo '<input type="submit" value="Eliminar">';
                     echo '</form>';
 
-                    $nombre = "";
-                    if ($_SERVER["REQUEST_METHOD"] == "GET" && (test_input($_GET["eliminar"]) != null)) {
-                        $nombre = test_input($_GET["eliminar"]);
-                        echo $nombre;
-                        // $bbdd = new BBDD("db", "root", "politecnic", "Juegos");
-                        // $eliminar = $bbdd->eliminar($consultaEliminar, $nombre);
-                    }
-                }
-                echo "<br>";
-
-                if (!empty($resultado)) {
                     echo "<table border=1px>";
                     echo "<tr>\n";
                     foreach ($resultado[0] as $key => $useless) {
@@ -109,15 +87,19 @@
                         echo "</tr>\n";
                     }
                     echo "</table>\n";
+                } else {
+                    echo "No existen datos dentro de la tabla.";
                 }
-            } else {
-                echo $nombre;
-
-                echo "No existen datos dentro de la tabla.";
             }
         }
-        echo $nombre;
 
+        if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["eliminar"])) {
+            $eliminar = test_input($_GET["eliminar"]);
+            $consultaEliminar = test_input($_GET["consultaEliminar"]);
+            $bbdd = new BBDD("db", "root", "politecnic", "Juegos");
+            $eliminar = $bbdd->eliminar($consultaEliminar, $eliminar);
+            echo "Se ha eliminado $eliminar";
+        }
 
         function test_input($data)
         {

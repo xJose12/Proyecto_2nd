@@ -177,9 +177,25 @@
         public function eliminar($tabla, $nombre)
         {
             $conn = $this->connectar_bd();
-            //Eliminar desenvolopador
             try {
-                $conn->exec("DELETE FROM $tabla where nombre = '$nombre'");   
+                $resultado = $conn->query("SELECT * FROM $tabla WHERE nombre = '$nombre'");
+
+                if ($resultado->rowCount() > 0) {
+                    $row = $resultado->fetch(PDO::FETCH_ASSOC);
+                    $idtabla = $row['id'];
+
+                    if ($tabla == "genero") {
+                        $conn->exec("DELETE FROM video_gen WHERE id_genero = '$idtabla'");
+                        $conn->exec("DELETE FROM genero WHERE id = '$idtabla'");
+                    } else if ($tabla == "desenvolupador") {
+                        $conn->exec("UPDATE videojuego SET id_desenvolupador = NULL WHERE id_desenvolupador = $idtabla");
+                        $conn->exec("DELETE FROM $tabla where nombre = '$nombre'");
+                    } else if ($tabla == "plataforma") {
+                        $conn->exec("DELETE FROM video_plata WHERE id_plataforma = '$idtabla'");
+                        $conn->exec("DELETE FROM plataforma WHERE id = '$idtabla'");
+                    }
+                }
+                return $nombre; 
             } catch (PDOException $e) {
                 echo "Connection failed: " . $e->getMessage();
             }
