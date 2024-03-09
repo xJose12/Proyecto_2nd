@@ -9,9 +9,11 @@
 </head>
 
 <body>
-
+    <?php
+    include "ConexionBD.php";
+    ?>
     <header>
-        <h1>Funcionalidad 7</h1>
+        <h1>Eliminar Videojuego</h1>
     </header>
 
     <nav>
@@ -24,6 +26,45 @@
         <a href="funcionalidad7.php" <?php if (basename($_SERVER['PHP_SELF']) == 'funcionalidad7.php') echo 'class="active"'; ?>> Funcion 7</a>
 
     </nav>
+
+    <main>
+        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="get">
+            <label for="consulta">Elige el videojuego:</label><br>
+            <select name="eliminar" id="eliminar">
+                <option value="">Selecciona tu videojuego</option>
+                <?php
+                $bbdd = new BBDD("db", "root", "politecnic", "Juegos");
+                $resultado = $bbdd->consultar('videojuego');
+                foreach ($resultado as $row) {
+                    echo '<option value="' . $row["nombre"] . '">' . $row["nombre"] . '</option>';
+                }
+                ?>
+            </select>
+            <input type="submit" value="Eliminar">
+        </form> <br>
+
+        <?php
+        $eliminar = "";
+
+        if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["eliminar"])) {
+            $eliminar = test_input($_GET["eliminar"]);
+            $consultaEliminar = test_input($_GET["consultaEliminar"]);
+            $eliminar = $bbdd->eliminarVideojuego($eliminar);
+            echo "Se ha eliminado $eliminar";
+        }
+
+        function test_input($data)
+        {
+            $data = trim($data);
+            $data = stripslashes($data);
+            $data = htmlspecialchars($data);
+            return $data;
+        }
+        ?>
+    </main>
+
+
+
 
 </body>
 

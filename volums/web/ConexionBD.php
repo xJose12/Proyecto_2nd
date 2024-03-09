@@ -200,6 +200,22 @@
                 echo "Connection failed: " . $e->getMessage();
             }
         }
+
+
+        public function eliminarVideojuego($videojuegoNombre) {
+            $conn = $this->connectar_bd();
+            try {
+                $resultado = $conn->query("SELECT * FROM videojuego WHERE nombre = '$videojuegoNombre'");
+                $row = $resultado->fetch(PDO::FETCH_ASSOC);
+                $idVideojuego = $row['id'];
+
+                $conn->exec("DELETE FROM video_gen WHERE id_videojuego = '$idVideojuego'");
+                $conn->exec("DELETE FROM video_plata WHERE id_videojuego = '$idVideojuego'");
+                $conn->exec("DELETE FROM videojuego WHERE id = '$idVideojuego'");
+            } catch (PDOException $e) {
+                echo "Connection failed: ". $e->getMessage();
+            }
+        }
     }
 
     ?>
