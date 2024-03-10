@@ -195,14 +195,15 @@
                         $conn->exec("DELETE FROM plataforma WHERE id = '$idtabla'");
                     }
                 }
-                return $nombre; 
+                return $nombre;
             } catch (PDOException $e) {
                 echo "Connection failed: " . $e->getMessage();
             }
         }
 
 
-        public function eliminarVideojuego($videojuegoNombre) {
+        public function eliminarVideojuego($videojuegoNombre)
+        {
             $conn = $this->connectar_bd();
             try {
                 $resultado = $conn->query("SELECT * FROM videojuego WHERE nombre = '$videojuegoNombre'");
@@ -213,7 +214,31 @@
                 $conn->exec("DELETE FROM video_plata WHERE id_videojuego = '$idVideojuego'");
                 $conn->exec("DELETE FROM videojuego WHERE id = '$idVideojuego'");
             } catch (PDOException $e) {
-                echo "Connection failed: ". $e->getMessage();
+                echo "Connection failed: " . $e->getMessage();
+            }
+        }
+
+        public function consultarVideo_Nom_Fecha_Empresa($consulta, $tipoConsulta)
+        {
+            $conn = $this->connectar_bd();
+            try {
+                if ($tipoConsulta == 'nombre') {
+                    $resultado = $conn->query("SELECT * FROM videojuego WHERE nombre LIKE '%$consulta%'");
+                } elseif ($tipoConsulta == 'fecha') {
+                    $resultado = $conn->query("SELECT * FROM videojuego WHERE fecha_lanzamiento = '$consulta'");
+                } elseif ($tipoConsulta == 'empresa') {
+                    $resultado = $conn->query("SELECT * FROM videojuego JOIN desenvolupador WHERE id_desenvolupador = desenvolupador.id AND desenvolupador.nombre = '$consulta'");
+                }
+                $smtp = $resultado->execute();
+                if ($resultado->rowCount() == 0) {
+                    $resultado = null;
+                    return ($resultado);
+                } else {
+                    return ($resultado);
+                }
+                $conn = null;
+            } catch (PDOException $e) {
+                //throw $th;
             }
         }
     }
