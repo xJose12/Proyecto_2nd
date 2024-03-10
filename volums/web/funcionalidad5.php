@@ -9,6 +9,9 @@
 </head>
 
 <body>
+    <?php
+    include "ConexionBD.php";
+    ?>
     <header>
         <h1>Funcionalidad 5</h1>
     </header>
@@ -22,6 +25,76 @@
         <a href="funcionalidad6.php"> Funcion 6</a>
         <a href="funcionalidad7.php"> Funcion 7</a>
     </nav>
+
+    <main>
+
+        <div>
+            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="get">
+                <h2>Inserta tu Videojuego</h2>
+                Nombre: <input type="text" name="nombre"><br>
+                Fecha Lazamiento: <input type="date" name="fecha"><br>
+                Pegi: <select name="pegi" id="pegi">
+                    <option value="">Selecciona tu Pegi</option>
+                    <option value=3>3</option>
+                    <option value=7>7</option>
+                    <option value=12>12</option>
+                    <option value=16>16</option>
+                    <option value=18>18</option>
+                </select><br>
+                Plataforma:
+                <?php
+                $bbdd = new BBDD("db", "root", "politecnic", "Juegos");
+                $resultado = $bbdd->consultar('plataforma');
+                foreach ($resultado as $row) {
+                    echo '<input type="checkbox" name="plataforma[]" value="' . $row["nombre"] . '">' . $row["nombre"] . '<br>';
+                }
+                ?>
+                Desarrollador:
+                <select name="desarrollador" id="desarrollador">
+                    <option value="">Selecciona tu Desarrollador</option>
+                    <?php
+                    $bbdd = new BBDD("db", "root", "politecnic", "Juegos");
+                    $resultado = $bbdd->consultar('desenvolupador');
+                    foreach ($resultado as $row) {
+                        echo '<option value="' . $row["nombre"] . '">' . $row["nombre"] . '</option>';
+                    }
+                    ?>
+                </select><br>
+                <input type="submit">
+            </form> <br>
+        </div>
+
+        <?php
+        $nombre = $fecha = $pegi = $plataforma = $desarrollador = "";
+
+        if ($_SERVER["REQUEST_METHOD"] == "GET" && test_input($_GET["nombre"] != null)) {
+            $nombre = test_input($_GET["nombre"]);
+            $fecha = test_input($_GET["fecha"]);
+            $pegi = test_input($_GET["pegi"]);
+            $plataforma = test_input($_GET["plataforma[]"]);
+            $desarrollador = test_input($_GET["desarrollador"]);
+
+            echo "INSERSIONES";
+            echo $nombre;
+            echo $fecha;
+            echo $pegi;
+            echo $desarrollador;
+
+
+        }
+
+
+        function test_input($data)
+        {
+            $data = trim($data);
+            $data = stripslashes($data);
+            $data = htmlspecialchars($data);
+            return $data;
+        }
+        ?>
+
+
+    </main>
 
 </body>
 

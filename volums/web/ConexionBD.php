@@ -227,20 +227,25 @@
                 } elseif ($tipoConsulta == 'fecha') {
                     $resultado = $conn->query("SELECT * FROM videojuego WHERE fecha_lanzamiento = '$consulta'");
                 } elseif ($tipoConsulta == 'empresa') {
-                    $resultado = $conn->query("SELECT * FROM videojuego JOIN desenvolupador WHERE id_desenvolupador = desenvolupador.id AND desenvolupador.nombre = '$consulta'");
+                    $resultado = $conn->query("SELECT videojuego.*, desenvolupador.nombre AS Nombre_Empresa
+                                               FROM videojuego 
+                                               JOIN desenvolupador ON videojuego.id_desenvolupador = desenvolupador.id 
+                                               WHERE desenvolupador.nombre LIKE '%$consulta%'");
                 }
-                $smtp = $resultado->execute();
                 if ($resultado->rowCount() == 0) {
-                    $resultado = null;
-                    return ($resultado);
+                    return null;
                 } else {
-                    return ($resultado);
+                    return $resultado;
                 }
                 $conn = null;
             } catch (PDOException $e) {
                 //throw $th;
             }
         }
+
+        public function insertarVideojuego() {
+            $conn = $this->connectar_bd();
+        } 
     }
 
     ?>
