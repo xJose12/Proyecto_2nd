@@ -63,6 +63,7 @@ if (!isset($_SESSION['user'])) {
                     echo '<input type="checkbox" name="plataforma[]" value="' . $row["nombre"] . '">' . $row["nombre"] . '<br>';
                 }
                 ?>
+
                 Desarrollador:
                 <select name="desarrollador" id="desarrollador">
                     <option value="">Selecciona tu Desarrollador</option>
@@ -88,24 +89,17 @@ if (!isset($_SESSION['user'])) {
         </div>
 
         <?php
-        $nombre = $fecha = $pegi = $plataforma = $desarrollador = $genero = "";
+        $nombre = $fecha = $pegi = $plataformas = $desarrollador = $genero = "";
 
-        if ($_SERVER["REQUEST_METHOD"] == "GET" && test_input($_GET["nombre"] != null)) {
+        if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["nombre"])) {
             $nombre = test_input($_GET["nombre"]);
             $fecha = test_input($_GET["fecha"]);
             $pegi = test_input($_GET["pegi"]);
-            $plataforma = test_input($_GET["plataforma[]"]);
+            $plataformas = $_GET["plataforma"];            
             $desarrollador = test_input($_GET["desarrollador"]);
             $genero = test_input($_GET["genero"]);
-
-            echo "INSERSIONES";
-            echo $nombre;
-            echo $fecha;
-            echo $pegi;
-            echo $desarrollador;
-
-            $insertar = $bbdd->insertarVideojuego($nombre, $fecha, $pegi, $plataforma, $desarrollador, $genero);
-
+            $insertar = $bbdd->insertarVideojuego($nombre, $fecha, $pegi, $plataformas, $desarrollador, $genero);
+            echo "Se ha eliminado $eliminar";
         }
         ?>
     </main>

@@ -1,23 +1,33 @@
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Estilo del body */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+    background-color: #f0f0f0;
+}
+
 /* Estilos para el encabezado */
 header {
     background-color: #333;
     color: #fff;
     padding: 20px;
-    display: flex; /* Usamos flexbox para alinear elementos */
-    justify-content: space-between; /* Alineamos los elementos a los extremos */
-    align-items: center; /* Centramos verticalmente los elementos */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-header h1 {
-    margin: 0 auto; /* Centramos horizontalmente el texto */
-    font-size: 32px; /* Aumentamos el tamaño de la fuente */
-    font-family: 'Arial', sans-serif; /* Cambiamos la fuente */
-}
-
+header h1,
 header h3 {
-    margin: 5px 0 0;
-    font-size: 24px; /* Aumentamos el tamaño de la fuente */
-    font-family: 'Arial', sans-serif; /* Cambiamos la fuente */
+    margin: auto;
+    font-family: 'Arial', sans-serif;
 }
 
 /* Estilos para el botón de inicio de sesión */
@@ -27,6 +37,7 @@ header h3 {
     padding: 8px 16px;
     border-radius: 5px;
     text-decoration: none;
+    margin-top: 10px;
 }
 
 .login-button:hover {
@@ -43,10 +54,10 @@ nav {
 nav a {
     color: #fff;
     text-decoration: none;
-    padding: 8px 16px; /* Aumentamos el espacio alrededor de los enlaces */
-    margin: 0 8px; /* Aumentamos el espacio entre enlaces */
+    padding: 8px 16px;
+    margin: 0 8px;
     border-radius: 5px;
-    font-family: 'Arial', sans-serif; /* Cambiamos la fuente */
+    font-family: 'Arial', sans-serif;
 }
 
 nav a:hover {
@@ -55,81 +66,115 @@ nav a:hover {
 
 /* Estilos para el enlace activo */
 nav a.active {
-    background-color: #ffcc00; /* Cambia el color de fondo para resaltar */
-    color: #000; /* Cambia el color del texto para que sea legible */
-    font-weight: bold; /* Otras modificaciones visuales para indicar la selección */
+    background-color: #ffcc00;
+    color: #000;
+    font-weight: bold;
 }
 
 /* Estilos para el contenido principal */
 main {
-    text-align: center; /* Centra el contenido */
-    margin-top: 50px; /* Espacio entre el encabezado y el contenido */
+    text-align: center;
+    margin-top: 50px;
 }
 
-/* Estilos generales */
-body {
-    font-family: 'Arial', sans-serif; /* Cambiamos la fuente */
-    margin: 0;
-    padding: 0;
-    line-height: 1.6; /* Aumentamos el espaciado entre líneas */
+/* Estilos para los formularios */
+form {
+    background-color: #86c0ff;
+    border: 2px solid #0056b3; /* Borde oscuro */
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px auto;
+    width: 80%;
+    max-width: 600px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+form h2 {
+    margin-top: 0;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+select,
+input[type="text"],
+input[type="date"],
+input[type="submit"] {
+    margin: 5px;
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+input[type="submit"] {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover {
+    background-color: #0056b3;
 }
 
 /* Estilos para la tabla */
 table {
-    width: 80%; /* Ancho de la tabla */
-    margin: 20px auto; /* Centrar la tabla horizontalmente con un espacio superior */
-    border-collapse: collapse; /* Fusiona los bordes de las celdas */
-    font-family: 'Arial', sans-serif; /* Cambiamos la fuente */
+    width: 80%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    font-family: 'Arial', sans-serif;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 th, td {
-    padding: 12px; /* Aumentamos el espaciado interno de las celdas */
-    border: 1px solid #ddd; /* Borde de las celdas */
+    padding: 12px;
+    border: 1px solid #ddd;
 }
 
 th {
-    background-color: #f2f2f2; /* Color de fondo del encabezado */
-    font-weight: bold; /* Negrita en el encabezado */
-    text-transform: uppercase; /* Convertir el texto a mayúsculas */
+    background-color: #f2f2f2;
+    font-weight: bold;
+    text-transform: uppercase;
 }
 
-/* Estilos para los encabezados específicos */
 th.column1 {
-    background-color: #007bff; /* Color de fondo personalizado */
-    color: #fff; /* Color de texto personalizado */
+    background-color: #007bff;
+    color: #fff;
 }
 
 th.column2 {
-    background-color: #ffcc00; /* Color de fondo personalizado */
-    color: #000; /* Color de texto personalizado */
+    background-color: #ffcc00;
+    color: #000;
 }
 
-/* Estilos para las celdas específicas */
 td.column1 {
-    background-color: #e6f7ff; /* Color de fondo personalizado */
+    background-color: #e6f7ff;
 }
 
 td.column2 {
-    background-color: #fff3e6; /* Color de fondo personalizado */
+    background-color: #fff3e6;
 }
 
 tr:nth-child(even) {
-    background-color: #f2f2f2; /* Color de fondo de las filas pares */
+    background-color: #f2f2f2;
 }
 
-/* Estilos para las filas impares */
 tr:nth-child(odd) {
-    background-color: #fff; /* Color de fondo de las filas impares */
+    background-color: #fff;
 }
 
-/* Estilos para los enlaces dentro de las celdas */
 td a {
-    text-decoration: none; /* Sin subrayado en los enlaces */
-    color: #007bff; /* Color de texto personalizado */
-    font-weight: bold; /* Texto en negrita */
+    text-decoration: none;
+    color: #007bff;
+    font-weight: bold;
 }
 
-/* Estilos para los enlaces dentro de las celdas al pasar el mouse */
 td a:hover {
-    text-decoration: underline; /* Subrayado en los enlaces al pasar el mouse */
+    text-decoration: underline;
 }

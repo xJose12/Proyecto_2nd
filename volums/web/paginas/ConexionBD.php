@@ -194,8 +194,8 @@
                         $conn->exec("DELETE FROM video_plata WHERE id_plataforma = '$idtabla'");
                         $conn->exec("DELETE FROM plataforma WHERE id = '$idtabla'");
                     }
+                    return $nombre;
                 }
-                return $nombre;
             } catch (PDOException $e) {
                 echo "Connection failed: " . $e->getMessage();
             }
@@ -243,7 +243,7 @@
             }
         }
 
-        public function insertarVideojuego($nombre, $fecha, $pegi, $plataforma, $desarrollador, $genero)
+        public function insertarVideojuego($nombre, $fecha, $pegi, $plataformas, $desarrollador, $genero)
         {
             $conn = $this->connectar_bd();
             try {
@@ -253,6 +253,15 @@
                     $row = $desarrolladorQuery->fetch(PDO::FETCH_ASSOC);
                     $idDesarrollador = $row['id'];
                     $conn->exec("INSERT INTO videojuego(nombre, fecha_lanzamiento, pegi, id_desenvolupador) VALUES ('$nombre', '$fecha', '$pegi', '$idDesarrollador')");
+                    $buscarVideojuegoInsertado = $conn->query("SELECT * FROM videojuego WHERE nombre = '$nombre'");
+                    $row = $buscarVideojuegoInsertado->fetch(PDO::FETCH_ASSOC);
+                    $idVideojuego = $row['id'];
+                    foreach ($plataformas as $plataforma) {
+                        $plataformaQuery = $conn->query("SELECT * FROM plataforma WHERE nombre = '$plataforma'");
+                        $row = $plataformaQuery->fetch(PDO::FETCH_ASSOC);
+                        $idPlataforma = $row['id'];
+                        $conn->exec("INSERT INTO video_plata(id_videojuego, id_plataforma) VALUES ('$idVideojuego', '$idPlataforma')");
+                    }
                 }
             } catch (PDOException $e) {
                 echo "Connection failed: " . $e->getMessage();

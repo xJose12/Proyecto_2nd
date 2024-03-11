@@ -46,7 +46,7 @@
 
     <main>
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="get">
-            <label for="consulta">Consultas</label><br>
+            <h2>Consultas</h2>
             <select name="consulta" id="consulta">
                 <option value="">Selecciona Tu Consulta</option>
                 <option value="genero">Genero</option>
@@ -69,7 +69,7 @@
                 if (!empty($resultado) && isset($_SESSION['user'])) {
                     // Formulario de eliminación
                     echo '<form action="' . htmlspecialchars($_SERVER["PHP_SELF"]) . '" method="get">';
-                    echo '<label for="eliminar">Eliminar ';
+                    echo '<h2>Eliminar ';
 
                     if ($consulta == "genero") {
                         echo 'Genero';
@@ -79,7 +79,7 @@
                         echo 'Plataforma';
                     }
 
-                    echo '</label><br>';
+                    echo '</h2>';
                     echo '<select name="eliminar" id="eliminar">';
                     echo '<option value="" selected>Selecciona el elemento a eliminar</option>';
                     foreach ($resultado as $row) {
@@ -89,7 +89,7 @@
                     echo '<input type="hidden" name="consultaEliminar" value="' . $consulta . '">';
                     echo '<input type="submit" value="Eliminar">';
                     echo '</form>';
-                    echo "<table border=1px>";
+                    echo "<table>";
                     echo "<tr>\n";
                     foreach ($resultado[0] as $key => $useless) {
                         echo "<th>$key</th>";
@@ -104,7 +104,7 @@
                     }
                     echo "</table>\n";
                 } elseif (!empty($resultado)) {
-                    echo "<table border=1px>";
+                    echo "<table>";
                     echo "<tr>\n";
                     foreach ($resultado[0] as $key => $useless) {
                         echo "<th>$key</th>";
@@ -128,7 +128,11 @@
             $eliminar = test_input($_GET["eliminar"]);
             $consultaEliminar = test_input($_GET["consultaEliminar"]);
             $eliminar = $bbdd->eliminar($consultaEliminar, $eliminar);
-            echo "Se ha eliminado $eliminar";
+            if (isset($eliminar)) {
+                echo "Se ha eliminado $eliminar";
+            } else {
+                echo "No se ha eliminado nada";
+            }
         }
         ?>
 

@@ -83,7 +83,7 @@
         }
         if ($resultado !== null) {
             $resultado = $resultado->fetchAll(PDO::FETCH_ASSOC);
-            echo "<table border=1px>";
+            echo "<table>";
             echo "<tr>\n";
             foreach ($resultado[0] as $key => $useless) {
                 echo "<th>$key</th>";

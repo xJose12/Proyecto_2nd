@@ -44,7 +44,7 @@ if (!isset($_SESSION['user'])) {
 
     <main>
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="get">
-            <label for="consulta">Elige el videojuego:</label><br>
+            <h2>Elige el videojuego</h2>
             <select name="eliminar" id="eliminar">
                 <option value="">Selecciona tu videojuego</option>
                 <?php
