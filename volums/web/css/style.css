@@ -11,7 +11,6 @@ body {
     margin: 0;
     padding: 0;
     line-height: 1.6;
-    background-color: #f0f0f0;
 }
 
 /* Estilos para el encabezado */
@@ -78,6 +77,7 @@ main {
 }
 
 /* Estilos para los formularios */
+
 form {
     background-color: #86c0ff;
     border: 2px solid #0056b3; /* Borde oscuro */
@@ -108,6 +108,27 @@ input[type="submit"] {
     border: 1px solid #ccc;
 }
 
+.checkbox-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; /* Centra los elementos horizontalmente */
+    margin: 0 auto; /* Centra el contenedor horizontalmente en la página */
+}
+
+.checkbox-wrapper {
+    display: flex;
+    align-items: center; /* Alinea verticalmente los elementos */
+    flex-basis: calc(50% - 10px); /* Establece el ancho de cada elemento */
+    max-width: calc(50% - 10px); /* Establece el ancho máximo */
+    margin-bottom: 10px; /* Espacio entre las líneas */
+}
+
+.checkbox-wrapper input[type="checkbox"] {
+    margin-right: 5px; /* Espacio entre el checkbox y el texto */
+}
+
+
+
 input[type="submit"] {
     background-color: #007bff;
     color: #fff;
@@ -123,46 +144,28 @@ input[type="submit"]:hover {
 
 /* Estilos para la tabla */
 table {
-    width: 80%;
+    display: inline-table; /* Ajuste al contenido */
     margin: 20px auto;
     border-collapse: collapse;
     font-family: 'Arial', sans-serif;
-    background-color: #fff;
-    border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border: 3px solid #0056b3;
 }
 
 th, td {
     padding: 12px;
-    border: 1px solid #ddd;
+    border-right: 2px solid #0056b3; /* Borde entre columnas */
 }
 
 th {
-    background-color: #f2f2f2;
+    background-color: #86c0ff;
+    border: 2px solid #0056b3;
     font-weight: bold;
     text-transform: uppercase;
 }
 
-th.column1 {
-    background-color: #007bff;
-    color: #fff;
-}
-
-th.column2 {
-    background-color: #ffcc00;
-    color: #000;
-}
-
-td.column1 {
-    background-color: #e6f7ff;
-}
-
-td.column2 {
-    background-color: #fff3e6;
-}
-
 tr:nth-child(even) {
-    background-color: #f2f2f2;
+    background-color: #d3d3d3;
 }
 
 tr:nth-child(odd) {

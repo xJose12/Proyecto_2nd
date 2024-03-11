@@ -57,12 +57,17 @@ if (!isset($_SESSION['user'])) {
                     <option value=18>18</option>
                 </select><br>
                 Plataforma:
-                <?php
-                $resultado = $bbdd->consultar('plataforma');
-                foreach ($resultado as $row) {
-                    echo '<input type="checkbox" name="plataforma[]" value="' . $row["nombre"] . '">' . $row["nombre"] . '<br>';
-                }
-                ?>
+                <div class="checkbox-container">
+                    <?php
+                    $resultado = $bbdd->consultar('plataforma');
+                    foreach ($resultado as $row) {
+                        echo '<div class="checkbox-wrapper">';
+                        echo '<input type="checkbox" name="plataforma[]" value="' . $row["nombre"] . '">';
+                        echo '<label>' . $row["nombre"] . '</label>';
+                        echo '</div>';
+                    }
+                    ?>
+                </div>
 
                 Desarrollador:
                 <select name="desarrollador" id="desarrollador">
@@ -95,7 +100,7 @@ if (!isset($_SESSION['user'])) {
             $nombre = test_input($_GET["nombre"]);
             $fecha = test_input($_GET["fecha"]);
             $pegi = test_input($_GET["pegi"]);
-            $plataformas = $_GET["plataforma"];            
+            $plataformas = $_GET["plataforma"];
             $desarrollador = test_input($_GET["desarrollador"]);
             $genero = test_input($_GET["genero"]);
             $insertar = $bbdd->insertarVideojuego($nombre, $fecha, $pegi, $plataformas, $desarrollador, $genero);
