@@ -71,8 +71,7 @@ if (!isset($_SESSION['user'])) {
             echo "Desenvolupador Nombre: $DesenvolupadorNombre <br>";
             echo "Plataforma Nombre: $PlataformaNombre <br>";
 
-            $inserir = new BBDD("db", "root", "politecnic", "Juegos");
-            $insertar = $inserir->alta($GeneroNombre, $DesenvolupadorNombre, $PlataformaNombre);
+            $insertar = $bbdd->alta($GeneroNombre, $DesenvolupadorNombre, $PlataformaNombre);
         }
 
         function test_input($data)

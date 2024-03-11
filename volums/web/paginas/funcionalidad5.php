@@ -58,7 +58,6 @@ if (!isset($_SESSION['user'])) {
                 </select><br>
                 Plataforma:
                 <?php
-                $bbdd = new BBDD("db", "root", "politecnic", "Juegos");
                 $resultado = $bbdd->consultar('plataforma');
                 foreach ($resultado as $row) {
                     echo '<input type="checkbox" name="plataforma[]" value="' . $row["nombre"] . '">' . $row["nombre"] . '<br>';
@@ -68,7 +67,6 @@ if (!isset($_SESSION['user'])) {
                 <select name="desarrollador" id="desarrollador">
                     <option value="">Selecciona tu Desarrollador</option>
                     <?php
-                    $bbdd = new BBDD("db", "root", "politecnic", "Juegos");
                     $resultado = $bbdd->consultar('desenvolupador');
                     foreach ($resultado as $row) {
                         echo '<option value="' . $row["nombre"] . '">' . $row["nombre"] . '</option>';

@@ -58,7 +58,6 @@
                 <select name="empresa" id="empresa">
                     <option value="">Selecciona una Empresa</option>
                     <?php
-                    $bbdd = new BBDD("db", "root", "politecnic", "Juegos");
                     $desenvolupador = $bbdd->consultar('desenvolupador');
                     foreach ($desenvolupador as $row) {
                         echo '<option value="' . $row["nombre"] . '">' . $row["nombre"] . '</option>';

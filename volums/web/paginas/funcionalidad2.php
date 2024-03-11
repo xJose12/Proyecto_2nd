@@ -44,7 +44,6 @@ if (!isset($_SESSION['user'])) {
 
     <main>
         <?php
-        $bbdd = new BBDD("db", "root", "politecnic", "Juegos");
         $import = $bbdd->importarJson("games.json");
         if ($import) {
             echo "<h2>¡Tus videojuegos se han importado correctamente!</h2>";

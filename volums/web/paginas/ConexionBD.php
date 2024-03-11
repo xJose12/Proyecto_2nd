@@ -243,10 +243,26 @@
             }
         }
 
-        public function insertarVideojuego() {
+        public function insertarVideojuego()
+        {
             $conn = $this->connectar_bd();
-        } 
+        }
+
+        public function autoInsertarUsuarios()
+        {
+            $conn = $this->connectar_bd();
+            try {
+                $resultado = $conn->query("SELECT * FROM usuarios WHERE user = 'admin'");
+                if ($resultado->rowCount() <= 0) {
+                    $conn->exec("INSERT INTO usuarios(user, password) VALUE ('admin', 'pito123')");
+                }
+            } catch (PDOException $e) {
+                echo "Connection failed: " . $e->getMessage();
+            }
+        }
     }
+    $bbdd = new BBDD("db", "root", "politecnic", "Juegos");
+    $insertar = $bbdd->autoInsertarUsuarios();
 
     ?>
 </body>

@@ -48,7 +48,6 @@ if (!isset($_SESSION['user'])) {
             <select name="eliminar" id="eliminar">
                 <option value="">Selecciona tu videojuego</option>
                 <?php
-                $bbdd = new BBDD("db", "root", "politecnic", "Juegos");
                 $resultado = $bbdd->consultar('videojuego');
                 foreach ($resultado as $row) {
                     echo '<option value="' . $row["nombre"] . '">' . $row["nombre"] . '</option>';

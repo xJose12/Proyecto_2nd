@@ -61,7 +61,6 @@
 
         if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["consulta"])) {
             $consulta = test_input($_GET["consulta"]);
-            $bbdd = new BBDD("db", "root", "politecnic", "Juegos");
             $resultado = $bbdd->consultar($consulta);
 
             if ($resultado !== null) {
@@ -114,7 +113,6 @@
         if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["eliminar"])) {
             $eliminar = test_input($_GET["eliminar"]);
             $consultaEliminar = test_input($_GET["consultaEliminar"]);
-            $bbdd = new BBDD("db", "root", "politecnic", "Juegos");
             $eliminar = $bbdd->eliminar($consultaEliminar, $eliminar);
             echo "Se ha eliminado $eliminar";
         }
