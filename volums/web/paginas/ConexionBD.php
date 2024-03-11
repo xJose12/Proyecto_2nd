@@ -243,9 +243,20 @@
             }
         }
 
-        public function insertarVideojuego()
+        public function insertarVideojuego($nombre, $fecha, $pegi, $plataforma, $desarrollador, $genero)
         {
             $conn = $this->connectar_bd();
+            try {
+                $resultado = $conn->query("SELECT * FROM videojuego WHERE nombre = '$nombre'");
+                if ($resultado->rowCount() <= 0) {
+                    $desarrolladorQuery = $conn->query("SELECT * FROM desenvolupador WHERE nombre = '$desarrollador'");
+                    $row = $desarrolladorQuery->fetch(PDO::FETCH_ASSOC);
+                    $idDesarrollador = $row['id'];
+                    $conn->exec("INSERT INTO videojuego(nombre, fecha_lanzamiento, pegi, id_desenvolupador) VALUES ('$nombre', '$fecha', '$pegi', '$idDesarrollador')");
+                }
+            } catch (PDOException $e) {
+                echo "Connection failed: " . $e->getMessage();
+            }
         }
 
         public function autoInsertarUsuarios()
@@ -254,7 +265,7 @@
             try {
                 $resultado = $conn->query("SELECT * FROM usuarios WHERE user = 'admin'");
                 if ($resultado->rowCount() <= 0) {
-                    $conn->exec("INSERT INTO usuarios(user, password) VALUE ('admin', 'pito123')");
+                    $conn->exec("INSERT INTO usuarios(user, password) VALUES ('admin', 'pito123')");
                 }
             } catch (PDOException $e) {
                 echo "Connection failed: " . $e->getMessage();
@@ -269,7 +280,7 @@
         $data = htmlspecialchars($data);
         return $data;
     }
-    
+
     $bbdd = new BBDD("db", "root", "politecnic", "Juegos");
     $insertar = $bbdd->autoInsertarUsuarios();
 

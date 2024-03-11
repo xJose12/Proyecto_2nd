@@ -10,7 +10,9 @@
 </head>
 
 <body>
-
+    <?php
+    include "paginas/ConexionBD.php";
+    ?>
     <header>
         <h1>PROYECTO PHP</h1>
         <h3>Ana Maria y José Antonio</h3>

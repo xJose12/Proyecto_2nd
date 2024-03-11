@@ -73,12 +73,22 @@ if (!isset($_SESSION['user'])) {
                     }
                     ?>
                 </select><br>
+                Genero:
+                <select name="genero" id="genero">
+                    <option value="">Selecciona tu Genero</option>
+                    <?php
+                    $resultado = $bbdd->consultar('genero');
+                    foreach ($resultado as $row) {
+                        echo '<option value="' . $row["nombre"] . '">' . $row["nombre"] . '</option>';
+                    }
+                    ?>
+                </select><br>
                 <input type="submit">
             </form> <br>
         </div>
 
         <?php
-        $nombre = $fecha = $pegi = $plataforma = $desarrollador = "";
+        $nombre = $fecha = $pegi = $plataforma = $desarrollador = $genero = "";
 
         if ($_SERVER["REQUEST_METHOD"] == "GET" && test_input($_GET["nombre"] != null)) {
             $nombre = test_input($_GET["nombre"]);
@@ -86,12 +96,16 @@ if (!isset($_SESSION['user'])) {
             $pegi = test_input($_GET["pegi"]);
             $plataforma = test_input($_GET["plataforma[]"]);
             $desarrollador = test_input($_GET["desarrollador"]);
+            $genero = test_input($_GET["genero"]);
 
             echo "INSERSIONES";
             echo $nombre;
             echo $fecha;
             echo $pegi;
             echo $desarrollador;
+
+            $insertar = $bbdd->insertarVideojuego($nombre, $fecha, $pegi, $plataforma, $desarrollador, $genero);
+
         }
         ?>
     </main>
