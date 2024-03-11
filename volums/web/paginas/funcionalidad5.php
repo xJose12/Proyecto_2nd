@@ -46,7 +46,7 @@ if (!isset($_SESSION['user'])) {
         <div>
             <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="get">
                 <h2>Inserta tu Videojuego</h2>
-                Nombre: <input type="text" name="nombre"><br>
+                Nombre: <input type="text" name="nombre" required><br>
                 Fecha Lazamiento: <input type="date" name="fecha"><br>
                 Pegi: <select name="pegi" id="pegi">
                     <option value="">Selecciona tu Pegi</option>
@@ -56,7 +56,7 @@ if (!isset($_SESSION['user'])) {
                     <option value=16>16</option>
                     <option value=18>18</option>
                 </select><br>
-                Plataforma:
+                <h4>Escoge tus Plataformas</h4>
                 <div class="checkbox-container">
                     <?php
                     $resultado = $bbdd->consultar('plataforma');

@@ -118,14 +118,18 @@ input[type="submit"] {
 .checkbox-wrapper {
     display: flex;
     align-items: center; /* Alinea verticalmente los elementos */
-    flex-basis: calc(50% - 10px); /* Establece el ancho de cada elemento */
-    max-width: calc(50% - 10px); /* Establece el ancho máximo */
     margin-bottom: 10px; /* Espacio entre las líneas */
+    width: 50%; /* Ancho del contenedor de cada checkbox */
 }
 
 .checkbox-wrapper input[type="checkbox"] {
     margin-right: 5px; /* Espacio entre el checkbox y el texto */
 }
+
+.checkbox-wrapper label {
+    margin: 0; /* Elimina el margen del texto */
+}
+
 
 
 
