@@ -93,20 +93,8 @@ if (!isset($_SESSION['user'])) {
             echo $pegi;
             echo $desarrollador;
         }
-
-
-        function test_input($data)
-        {
-            $data = trim($data);
-            $data = stripslashes($data);
-            $data = htmlspecialchars($data);
-            return $data;
-        }
         ?>
-
-
     </main>
-
 </body>
 
 </html>

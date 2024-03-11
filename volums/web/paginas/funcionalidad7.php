@@ -66,20 +66,8 @@ if (!isset($_SESSION['user'])) {
             $eliminar = $bbdd->eliminarVideojuego($eliminar);
             echo "Se ha eliminado $eliminar";
         }
-
-        function test_input($data)
-        {
-            $data = trim($data);
-            $data = stripslashes($data);
-            $data = htmlspecialchars($data);
-            return $data;
-        }
         ?>
     </main>
-
-
-
-
 </body>
 
 </html>

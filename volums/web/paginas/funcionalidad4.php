@@ -66,7 +66,7 @@
             if ($resultado !== null) {
                 $resultado = $resultado->fetchAll(PDO::FETCH_ASSOC);
 
-                if (!empty($resultado)) {
+                if (!empty($resultado) && isset($_SESSION['user'])) {
                     // Formulario de eliminación
                     echo '<form action="' . htmlspecialchars($_SERVER["PHP_SELF"]) . '" method="get">';
                     echo '<label for="eliminar">Eliminar ';
@@ -89,7 +89,21 @@
                     echo '<input type="hidden" name="consultaEliminar" value="' . $consulta . '">';
                     echo '<input type="submit" value="Eliminar">';
                     echo '</form>';
-
+                    echo "<table border=1px>";
+                    echo "<tr>\n";
+                    foreach ($resultado[0] as $key => $useless) {
+                        echo "<th>$key</th>";
+                    }
+                    echo "</tr>\n";
+                    foreach ($resultado as $row) {
+                        echo "<tr>\n";
+                        foreach ($row as $key => $val) {
+                            echo "<td>$val</td>";
+                        }
+                        echo "</tr>\n";
+                    }
+                    echo "</table>\n";
+                } elseif (!empty($resultado)) {
                     echo "<table border=1px>";
                     echo "<tr>\n";
                     foreach ($resultado[0] as $key => $useless) {
@@ -115,14 +129,6 @@
             $consultaEliminar = test_input($_GET["consultaEliminar"]);
             $eliminar = $bbdd->eliminar($consultaEliminar, $eliminar);
             echo "Se ha eliminado $eliminar";
-        }
-
-        function test_input($data)
-        {
-            $data = trim($data);
-            $data = stripslashes($data);
-            $data = htmlspecialchars($data);
-            return $data;
         }
         ?>
 

@@ -261,6 +261,15 @@
             }
         }
     }
+
+    function test_input($data)
+    {
+        $data = trim($data);
+        $data = stripslashes($data);
+        $data = htmlspecialchars($data);
+        return $data;
+    }
+    
     $bbdd = new BBDD("db", "root", "politecnic", "Juegos");
     $insertar = $bbdd->autoInsertarUsuarios();
 
