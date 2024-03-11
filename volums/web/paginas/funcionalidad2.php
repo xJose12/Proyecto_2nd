@@ -1,3 +1,10 @@
+<?php session_start(); 
+if (!isset($_SESSION['user'])) {
+    header("Location: ../paginaInicial.php");
+    exit();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -17,19 +24,14 @@
     </header>
 
     <nav>
-    <a href="../paginaInicial_noLogged.php"> Pagina Inicio</a>
-    <a href="funcionalidad2.php" <?php if (basename($_SERVER['PHP_SELF']) == 'funcionalidad2.php') echo 'class="active"'; ?>> Funcion 2</a>
-    <?php if (isset($_SESSION['user'])) {
-    echo '<a href="funcionalidad3.php"> Funcion 3</a>';
-}
-
-    ?>
-    <!-- <a href="funcionalidad3.php"> Funcion 3</a> -->
-    <a href="funcionalidad4.php"> Funcion 4</a>
-    <a href="funcionalidad5.php"> Funcion 5</a>
-    <a href="funcionalidad6.php"> Funcion 6</a>
-    <a href="funcionalidad7.php"> Funcion 7</a>
-</nav>
+        <a href="../paginaInicial.php"> Pagina Inicio</a>
+        <a href="funcionalidad2.php" <?php if (basename($_SERVER['PHP_SELF']) == 'funcionalidad2.php') echo 'class="active"'; ?>> Funcion 2</a>
+        <a href="funcionalidad3.php"> Funcion 3</a>
+        <a href="funcionalidad4.php"> Funcion 4</a>
+        <a href="funcionalidad5.php"> Funcion 5</a>
+        <a href="funcionalidad6.php"> Funcion 6</a>
+        <a href="funcionalidad6.php"> Funcion 7</a>
+    </nav>
 
     <main>
         <?php

@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -17,13 +18,13 @@
     </header>
 
     <nav>
-        <a href="../paginaInicial_noLogged.php"> Pagina Inicio</a>
-        <a href="funcionalidad2.php"> Funcion 2</a>
-        <a href="funcionalidad3.php"> Funcion 3</a>
+        <a href="../paginaInicial.php"> Pagina Inicio</a>
+        <?php if (isset($_SESSION['user'])) {echo '<a href="funcionalidad2.php"> Funcion 2</a>';}?>
+        <?php if (isset($_SESSION['user'])) {echo '<a href="funcionalidad3.php"> Funcion 3</a>';}?>
         <a href="funcionalidad4.php" <?php if (basename($_SERVER['PHP_SELF']) == 'funcionalidad4.php') echo 'class="active"'; ?>> Funcion 4</a>
-        <a href="funcionalidad5.php"> Funcion 5</a>
+        <?php if (isset($_SESSION['user'])) {echo '<a href="funcionalidad5.php"> Funcion 5</a>';}?>
         <a href="funcionalidad6.php"> Funcion 6</a>
-        <a href="funcionalidad7.php"> Funcion 7</a>
+        <?php if (isset($_SESSION['user'])) {echo '<a href="funcionalidad7.php"> Funcion 7</a>';}?>
     </nav>
 
     <main>

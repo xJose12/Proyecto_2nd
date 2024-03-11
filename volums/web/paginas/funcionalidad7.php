@@ -1,3 +1,9 @@
+<?php session_start(); 
+if (!isset($_SESSION['user'])) {
+    header("Location: ../paginaInicial.php");
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -17,7 +23,7 @@
     </header>
 
     <nav>
-        <a href="../paginaInicial_noLogged.php"> Pagina Inicio</a>
+        <a href="../paginaInicial.php"> Pagina Inicio</a>
         <a href="funcionalidad2.php"> Funcion 2</a>
         <a href="funcionalidad3.php"> Funcion 3</a>
         <a href="funcionalidad4.php"> Funcion 4</a>

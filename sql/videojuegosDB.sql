@@ -48,3 +48,8 @@ CREATE TABLE video_plata (
 	FOREIGN KEY (id_videojuego) REFERENCES videojuego(id),
     FOREIGN KEY (id_plataforma) REFERENCES plataforma(id)
 );
+
+CREATE TABLE usuarios (
+    user VARCHAR(255) NOT NULL,
+    password VARCHAR(255) NOT NULL
+);
