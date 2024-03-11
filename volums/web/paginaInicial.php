@@ -11,7 +11,7 @@
 
 <body>
     <?php
-    include "paginas/ConexionBD.php";
+    include "paginas/clase.php";
     ?>
     <header>
         <h1>PROYECTO PHP</h1>

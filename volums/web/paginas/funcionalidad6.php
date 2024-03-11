@@ -11,7 +11,7 @@
 
 <body>
     <?php
-    include "ConexionBD.php";
+    include "clase.php";
     ?>
     <header>
         <h1>Formulario de Consultar Videojuegos por Nombre, Fecha y Empresa</h1>

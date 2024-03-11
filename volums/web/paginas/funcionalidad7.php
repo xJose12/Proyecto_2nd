@@ -16,7 +16,7 @@ if (!isset($_SESSION['user'])) {
 
 <body>
     <?php
-    include "ConexionBD.php";
+    include "clase.php";
     ?>
     <header>
         <h1>Formulario de Eliminar Videojuego</h1>
@@ -60,7 +60,7 @@ if (!isset($_SESSION['user'])) {
         <?php
         $eliminar = "";
 
-        if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["eliminar"])) {
+        if ($_SERVER["REQUEST_METHOD"] == "GET" && test_input($_GET["eliminar"]) != null) {
             $eliminar = test_input($_GET["eliminar"]);
             $consultaEliminar = test_input($_GET["consultaEliminar"]);
             $eliminar = $bbdd->eliminarVideojuego($eliminar);

@@ -1,6 +1,7 @@
 html {
   height: 100%;
 }
+
 body {
   margin:0;
   padding:0;
@@ -43,6 +44,12 @@ body {
   outline: none;
   background: transparent;
 }
+
+/* Cambiar color del texto cuando el campo está enfocado */
+.login-box .user-box input:focus {
+  color: #fff;
+}
+
 .login-box .user-box label {
   position: absolute;
   top:0;
@@ -73,7 +80,7 @@ body {
   overflow: hidden;
   transition: .5s;
   margin-top: 40px;
-  letter-spacing: 4px
+  letter-spacing: 4px;
 }
 
 .login-box a:hover {
@@ -190,5 +197,3 @@ body {
     bottom: 100%;
   }
 }
-
-

@@ -16,7 +16,7 @@ if (!isset($_SESSION['user'])) {
 
 <body>
     <?php
-    include "ConexionBD.php";
+    include "clase.php";
     ?>
     <header>
         <h1>Funcionalidad 5</h1>
