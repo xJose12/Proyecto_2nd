@@ -60,15 +60,19 @@ if (!isset($_SESSION['user'])) {
                 <div class="checkbox-container">
                     <?php
                     $resultado = $bbdd->consultar('plataforma');
-                    foreach ($resultado as $row) {
-                        echo '<div class="checkbox-wrapper">';
-                        echo '<input type="checkbox" name="plataforma[]" value="' . $row["nombre"] . '">';
-                        echo '<label>' . $row["nombre"] . '</label>';
-                        echo '</div>';
+                    if ($resultado) {
+                        foreach ($resultado as $row) {
+                            echo '<div class="checkbox-wrapper">';
+                            echo '<input type="checkbox" name="plataforma[]" value="' . $row["nombre"] . '">';
+                            echo '<label>' . $row["nombre"] . '</label>';
+                            echo '</div>';
+                        }
+                    } else {
+                        echo 'No se encontraron plataforma';
                     }
+
                     ?>
                 </div>
-
                 Desarrollador:
                 <select name="desarrollador" id="desarrollador">
                     <option value="">Selecciona tu Desarrollador</option>
@@ -79,16 +83,23 @@ if (!isset($_SESSION['user'])) {
                     }
                     ?>
                 </select><br>
-                Genero:
-                <select name="genero" id="genero">
-                    <option value="">Selecciona tu Genero</option>
+                <h4>Escoge tus Generos</h4>
+                <div class="checkbox-container">
                     <?php
                     $resultado = $bbdd->consultar('genero');
-                    foreach ($resultado as $row) {
-                        echo '<option value="' . $row["nombre"] . '">' . $row["nombre"] . '</option>';
+                    if ($resultado) {
+                        foreach ($resultado as $row) {
+                            echo '<div class="checkbox-wrapper">';
+                            echo '<input type="checkbox" name="genero[]" value="' . $row["nombre"] . '">';
+                            echo '<label>' . $row["nombre"] . '</label>';
+                            echo '</div>';
+                        }
+                    } else {
+                        echo 'No se encontraron generos';
                     }
+
                     ?>
-                </select><br>
+                </div>
                 <input type="submit">
             </form> <br>
         </div>
@@ -102,8 +113,8 @@ if (!isset($_SESSION['user'])) {
             $pegi = test_input($_GET["pegi"]);
             $plataformas = $_GET["plataforma"];
             $desarrollador = test_input($_GET["desarrollador"]);
-            $genero = test_input($_GET["genero"]);
-            $insertar = $bbdd->insertarVideojuego($nombre, $fecha, $pegi, $plataformas, $desarrollador, $genero);
+            $generos = $_GET["genero"];
+            $insertar = $bbdd->insertarVideojuego($nombre, $fecha, $pegi, $plataformas, $desarrollador, $generos);
             echo "Se ha eliminado $eliminar";
         }
         ?>

@@ -118,9 +118,9 @@
                         echo "</tr>\n";
                     }
                     echo "</table>\n";
-                } else {
-                    echo "No existen datos dentro de la tabla.";
-                }
+                } 
+            } else {
+                echo "No existen datos dentro de la tabla.";
             }
         }
 

@@ -25,6 +25,7 @@
             $this->bdname = $bdname;
         }
 
+        //Conectar a la Base de datos
         public function connectar_bd()
         {
             try {
@@ -36,9 +37,9 @@
             return $conn;
         }
 
+        //Importar el JSON
         public function importarJson($archivo)
         {
-            //importamos el json
             $videojuegos = array();
             if (!file_exists($archivo)) {
                 return false;
@@ -115,6 +116,7 @@
             }
         }
 
+        // Dar de alta Genero, Desenvolupador o Plataforma
         public function alta($GeneroNombre, $DesenvolupadorNombre, $PlataformaNombre)
         {
             $conn = $this->connectar_bd();
@@ -175,6 +177,7 @@
             }
         }
 
+        // Eliminar Genero, Desenvolupador o Plataforma
         public function eliminar($tabla, $nombre)
         {
             $conn = $this->connectar_bd();
@@ -202,7 +205,7 @@
             }
         }
 
-
+        // Eliminar un videojuego
         public function eliminarVideojuego($videojuegoNombre)
         {
             $conn = $this->connectar_bd();
@@ -219,6 +222,7 @@
             }
         }
 
+        // Consultar videojuegos por nombre, fecha o empresa (desenvolupador)
         public function consultarVideo_Nom_Fecha_Empresa($consulta, $tipoConsulta)
         {
             $conn = $this->connectar_bd();
@@ -244,7 +248,8 @@
             }
         }
 
-        public function insertarVideojuego($nombre, $fecha, $pegi, $plataformas, $desarrollador, $genero)
+        // Insertar videojuego con sus relaciones pertinenetes
+        public function insertarVideojuego($nombre, $fecha, $pegi, $plataformas, $desarrollador, $generos)
         {
             $conn = $this->connectar_bd();
             try {
@@ -263,19 +268,26 @@
                         $idPlataforma = $row['id'];
                         $conn->exec("INSERT INTO video_plata(id_videojuego, id_plataforma) VALUES ('$idVideojuego', '$idPlataforma')");
                     }
+                    foreach ($generos as $genero) {
+                        $generosQuery = $conn->query("SELECT * FROM genero WHERE nombre = '$genero'");
+                        $row = $generosQuery->fetch(PDO::FETCH_ASSOC);
+                        $idGenero = $row['id'];
+                        $conn->exec("INSERT INTO video_gen(id_videojuego, id_genero) VALUES ('$idVideojuego', '$idGenero')");
+                    }
                 }
             } catch (PDOException $e) {
                 echo "Connection failed: " . $e->getMessage();
             }
         }
 
+        // Insertar usuario por defecto para loggearnos en la pagina
         public function autoInsertarUsuarios()
         {
             $conn = $this->connectar_bd();
             try {
                 $resultado = $conn->query("SELECT * FROM usuarios WHERE user = 'admin'");
                 if ($resultado->rowCount() <= 0) {
-                    $conn->exec("INSERT INTO usuarios(user, password) VALUES ('admin', 'pito123')");
+                    $conn->exec("INSERT INTO usuarios(user, password) VALUES ('admin', 'voyaponerlesun10')");
                 }
             } catch (PDOException $e) {
                 echo "Connection failed: " . $e->getMessage();
@@ -291,7 +303,7 @@
         return $data;
     }
 
-    $bbdd = new BBDD("db", "root", "politecnic", "Juegos");
+    $bbdd = new BBDD($servername, $usuario, $contraseña, $bdname);
     $insertar = $bbdd->autoInsertarUsuarios();
 
     ?>

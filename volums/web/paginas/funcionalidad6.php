@@ -81,6 +81,7 @@
             $empresa = test_input($_GET["empresa"]);
             $resultado = $bbdd->consultarVideo_Nom_Fecha_Empresa($empresa, 'empresa');
         }
+        
         if ($resultado !== null) {
             $resultado = $resultado->fetchAll(PDO::FETCH_ASSOC);
             echo "<table>";
@@ -97,6 +98,8 @@
                 echo "</tr>\n";
             }
             echo "</table>\n";
+        } elseif ($_SERVER["REQUEST_METHOD"] == "GET" && test_input($_GET["nombre"] != null) || test_input($_GET["fecha"] != null) || test_input($_GET["empresa"] != null)){
+            echo "No existen datos dentro de la tabla.";
         }
         ?>
     </main>

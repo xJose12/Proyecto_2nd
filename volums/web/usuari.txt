@@ -1,0 +1,2 @@
+usuari: admin
+contrasenya: voyaponerlesun10

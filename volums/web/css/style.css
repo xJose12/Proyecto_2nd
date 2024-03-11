@@ -7,7 +7,7 @@
 
 /* Estilo del body */
 body {
-    font-family: 'Arial', sans-serif;
+    font-family: 'Verdana', sans-serif;
     margin: 0;
     padding: 0;
     line-height: 1.6;
@@ -90,7 +90,8 @@ form {
 }
 
 form h2 {
-    margin-top: 0;
+    margin-bottom: 10px;
+    font-weight: bold;
 }
 
 label {
@@ -129,9 +130,6 @@ input[type="submit"] {
 .checkbox-wrapper label {
     margin: 0; /* Elimina el margen del texto */
 }
-
-
-
 
 input[type="submit"] {
     background-color: #007bff;
