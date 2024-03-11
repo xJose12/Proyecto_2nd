@@ -16,13 +16,9 @@
             <h3>Ana Maria y José Antonio</h3>
         </header>
         <nav>
-            <a href="paginaInicial.php" <?php if (basename($_SERVER['PHP_SELF']) == 'paginaInicial.php') echo 'class="active"'; ?>> Pagina Inicial</a>
-            <a href="funcionalidad2.php"> Funcion 2</a>
-            <a href="funcionalidad3.php"> Funcion 3</a>
-            <a href="funcionalidad4.php"> Funcion 4</a>
-            <a href="funcionalidad5.php"> Funcion 5</a>
-            <a href="funcionalidad6.php"> Funcion 6</a>
-            <a href="funcionalidad7.php"> Funcion 7</a>
+            <a href="paginaInicial_noLogged.php" <?php if (basename($_SERVER['PHP_SELF']) == 'paginaInicial_noLogged.php') echo 'class="active"'; ?>> Pagina Inicial</a>
+            <a href="paginas/funcionalidad4.php"> Funcion 4</a>
+            <a href="paginas/funcionalidad6.php"> Funcion 6</a>
         </nav>
         <main>
             <div class="wrapper">

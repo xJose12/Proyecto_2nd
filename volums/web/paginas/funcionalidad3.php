@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Funcionalidad 3</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="../css/style.css">
 </head>
 
 <body>
@@ -17,7 +17,7 @@
     </header>
 
     <nav>
-        <a href="paginaInicial.php"> Pagina Inicio</a>
+        <a href="../paginaInicial_noLogged.php"> Pagina Inicio</a>
         <a href="funcionalidad2.php"> Funcion 2</a>
         <a href="funcionalidad3.php" <?php if (basename($_SERVER['PHP_SELF']) == 'funcionalidad3.php') echo 'class="active"'; ?>> Funcion 3</a>
         <a href="funcionalidad4.php"> Funcion 4</a>
@@ -29,11 +29,11 @@
     <main>
         <div>
             <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="get">
-                <h2>Inserir Genero</h2>
+                <h2>Insertar Genero</h2>
                 Nombre: <input type="text" name="GeneroNombre"><br>
-                <h2>Inserir Desenvolupador</h2>
+                <h2>Insertar Desenvolupador</h2>
                 Nombre: <input type="text" name="DesenvolupadorNombre"><br>
-                <h2>Inserir Plataforma</h2>
+                <h2>Insertar Plataforma</h2>
                 Nombre: <input type="text" name="PlataformaNombre"><br><br>
                 <input type="submit">
             </form> <br>

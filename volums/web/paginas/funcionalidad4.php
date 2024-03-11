@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Funcionalidad 4</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="../css/style.css">
 </head>
 
 <body>
@@ -17,7 +17,7 @@
     </header>
 
     <nav>
-        <a href="paginaInicial.php"> Pagina Inicio</a>
+        <a href="../paginaInicial_noLogged.php"> Pagina Inicio</a>
         <a href="funcionalidad2.php"> Funcion 2</a>
         <a href="funcionalidad3.php"> Funcion 3</a>
         <a href="funcionalidad4.php" <?php if (basename($_SERVER['PHP_SELF']) == 'funcionalidad4.php') echo 'class="active"'; ?>> Funcion 4</a>

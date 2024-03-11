@@ -15,7 +15,7 @@ session_start();
 
 // Verificar si l'usuari ja ha iniciat sessió, si es així, redirigir a "dashboard.php"
 if (isset($_SESSION['user'])) {
-    header("Location: paginaInicial.php");
+    header("Location: paginaInicial_logged.php");
     exit();
 }
 
@@ -32,7 +32,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($result->num_rows == 1) {
         // Iniciar sessión i redirigir al dashboard
         $_SESSION['user'] = $user;
-        header("Location: paginaInicial.php");
+        header("Location: paginaInicial_logged.php");
         exit();
     } else {
         $error_message = "Usuari o contrassenya incorrectes";
