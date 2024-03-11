@@ -1,4 +1,4 @@
-<?php session_start(); 
+<?php session_start();
 if (!isset($_SESSION['user'])) {
     header("Location: ../paginaInicial.php");
     exit();
@@ -20,6 +20,15 @@ if (!isset($_SESSION['user'])) {
     ?>
     <header>
         <h1>Formulario de insercción </h1>
+        <?php
+
+        if (!isset($_SESSION['user'])) {
+            echo '<a href="../paginaloggin.php" class="login-button">Iniciar Sesión</a>';
+        } else {
+            echo '<a href="../cerrarsesion.php" class="login-button">Cerrar Sesión</a>';
+        }
+
+        ?>
     </header>
 
     <nav>

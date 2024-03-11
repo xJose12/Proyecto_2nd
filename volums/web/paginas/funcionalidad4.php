@@ -15,16 +15,33 @@
     ?>
     <header>
         <h1>Formulario de Consultas y Eliminación</h1>
+        <?php
+
+        if (!isset($_SESSION['user'])) {
+            echo '<a href="../paginaloggin.php" class="login-button">Iniciar Sesión</a>';
+        } else {
+            echo '<a href="../cerrarsesion.php" class="login-button">Cerrar Sesión</a>';
+        }
+
+        ?>
     </header>
 
     <nav>
         <a href="../paginaInicial.php"> Pagina Inicio</a>
-        <?php if (isset($_SESSION['user'])) {echo '<a href="funcionalidad2.php"> Funcion 2</a>';}?>
-        <?php if (isset($_SESSION['user'])) {echo '<a href="funcionalidad3.php"> Funcion 3</a>';}?>
+        <?php if (isset($_SESSION['user'])) {
+            echo '<a href="funcionalidad2.php"> Funcion 2</a>';
+        } ?>
+        <?php if (isset($_SESSION['user'])) {
+            echo '<a href="funcionalidad3.php"> Funcion 3</a>';
+        } ?>
         <a href="funcionalidad4.php" <?php if (basename($_SERVER['PHP_SELF']) == 'funcionalidad4.php') echo 'class="active"'; ?>> Funcion 4</a>
-        <?php if (isset($_SESSION['user'])) {echo '<a href="funcionalidad5.php"> Funcion 5</a>';}?>
+        <?php if (isset($_SESSION['user'])) {
+            echo '<a href="funcionalidad5.php"> Funcion 5</a>';
+        } ?>
         <a href="funcionalidad6.php"> Funcion 6</a>
-        <?php if (isset($_SESSION['user'])) {echo '<a href="funcionalidad7.php"> Funcion 7</a>';}?>
+        <?php if (isset($_SESSION['user'])) {
+            echo '<a href="funcionalidad7.php"> Funcion 7</a>';
+        } ?>
     </nav>
 
     <main>
